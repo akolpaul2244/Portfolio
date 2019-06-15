@@ -1,0 +1,733 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Akol Paul — Software Engineer{% endblock %}
+{% block meta_description %}Software Engineer specialising in scalable Django, React, and AI/ML systems for fintech, humanitarian tech, and beyond. Final-year BSc Software Engineering student at Makerere University.{% endblock %}
+{% block og_title %}Akol Paul — Software Engineer{% endblock %}
+{% block og_description %}Full-stack engineer and AI/ML practitioner building impactful systems shipped for the world.{% endblock %}
+{% block canonical %}https://akolpaul.dev/{% endblock %}
+
+{% block extra_css %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+<style>
+  
+  .hero-name-heading {
+    font-size: clamp(2.1rem, 11vw, 6rem);
+    line-height: 0.95;
+    white-space: nowrap;
+  }
+
+  
+  .hero-orbit-card {
+    --orbit-size: clamp(170px, 52vw, 260px);
+    position: relative;
+    width: var(--orbit-size);
+    height: var(--orbit-size);
+    margin: 0 auto;
+  }
+
+  .hero-orbit-centre {
+    width: clamp(48px, calc(var(--orbit-size) * 0.27), 80px);
+    height: clamp(48px, calc(var(--orbit-size) * 0.27), 80px);
+  }
+  .hero-orbit-centre .fas {
+    font-size: clamp(1rem, calc(var(--orbit-size) * 0.09), 1.5rem);
+  }
+
+  .hero-orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed;
+  }
+  .hero-orbit-ring--inner {
+    width: calc(var(--orbit-size) * 0.62);
+    height: calc(var(--orbit-size) * 0.62);
+    border-color: rgba(79, 70, 229, 0.25);
+    animation: orbitSpin 14s linear infinite;
+  }
+  .hero-orbit-ring--outer {
+    width: calc(var(--orbit-size) * 0.92);
+    height: calc(var(--orbit-size) * 0.92);
+    border-color: rgba(34, 211, 238, 0.15);
+    animation: orbitSpin 24s linear infinite reverse;
+  }
+
+  .hero-orbit-icon {
+    position: absolute;
+    width: clamp(28px, calc(var(--orbit-size) * 0.16), 44px);
+    height: clamp(28px, calc(var(--orbit-size) * 0.16), 44px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+  .hero-orbit-icon .fab,
+  .hero-orbit-icon .fas {
+    font-size: clamp(0.75rem, calc(var(--orbit-size) * 0.045), 1.1rem);
+  }
+
+  .hero-orbit-icon--top    { top: 0;    left: 50%; transform: translate(-50%, -50%); }
+  .hero-orbit-icon--bottom { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+  .hero-orbit-icon--right  { top: 50%;  right: 0;  transform: translate(50%, -50%); }
+  .hero-orbit-icon--left   { top: 50%;  left: 0;   transform: translate(-50%, -50%); }
+
+  
+  .hero-orbit-icon--top {
+    animation: orbitCounterSpinTop 14s linear infinite;
+  }
+  .hero-orbit-icon--bottom {
+    animation: orbitCounterSpinBottom 14s linear infinite;
+  }
+  .hero-orbit-icon--right {
+    animation: orbitCounterSpinRight 14s linear infinite;
+  }
+  .hero-orbit-icon--left {
+    animation: orbitCounterSpinLeft 14s linear infinite;
+  }
+  .hero-orbit-ring--outer .hero-orbit-icon--top {
+    animation: orbitCounterSpinTop 24s linear infinite reverse;
+  }
+  .hero-orbit-ring--outer .hero-orbit-icon--bottom {
+    animation: orbitCounterSpinBottom 24s linear infinite reverse;
+  }
+  .hero-orbit-ring--outer .hero-orbit-icon--right {
+    animation: orbitCounterSpinRight 24s linear infinite reverse;
+  }
+  .hero-orbit-ring--outer .hero-orbit-icon--left {
+    animation: orbitCounterSpinLeft 24s linear infinite reverse;
+  }
+
+  @keyframes orbitSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+  @keyframes orbitCounterSpinTop {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(-360deg); }
+  }
+  @keyframes orbitCounterSpinBottom {
+    from { transform: translate(-50%, 50%) rotate(0deg); }
+    to   { transform: translate(-50%, 50%) rotate(-360deg); }
+  }
+  @keyframes orbitCounterSpinRight {
+    from { transform: translate(50%, -50%) rotate(0deg); }
+    to   { transform: translate(50%, -50%) rotate(-360deg); }
+  }
+  @keyframes orbitCounterSpinLeft {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(-360deg); }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{#  HERO  #}
+<section class="relative min-h-screen flex items-center hero-bg overflow-hidden" aria-label="Introduction">
+  <canvas id="particles-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+
+  <div class="absolute -top-36 -left-36 w-72 sm:w-96 h-72 sm:h-96 rounded-full pointer-events-none"
+       style="background:radial-gradient(circle,rgba(79,70,229,0.13),transparent 70%);filter:blur(48px);"
+       aria-hidden="true"></div>
+  <div class="absolute -bottom-36 -right-36 w-72 sm:w-96 h-72 sm:h-96 rounded-full pointer-events-none"
+       style="background:radial-gradient(circle,rgba(34,211,238,0.09),transparent 70%);filter:blur(48px);"
+       aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 w-full">
+    <div class="grid lg:grid-cols-2 gap-10 xl:gap-20 items-center">
+
+      
+      <div>
+        <div class="hero-label inline-flex items-center gap-2.5 bg-brand/5 border border-brand/15 rounded-full px-4 py-1.5 mb-6 sm:mb-8">
+          <span class="w-2 h-2 rounded-full bg-jade animate-pulse flex-shrink-0" aria-hidden="true"></span>
+          <span class="font-mono text-xs text-brand font-medium tracking-wide">
+            Open to opportunities &middot; Remote &amp; On-site
+          </span>
+        </div>
+
+        <h1 class="hero-name-heading font-display font-bold tracking-tight mb-4 sm:mb-5 text-slate-900 dark:text-white">
+          Akol <span class="hero-name">Paul.</span>
+        </h1>
+
+        <p class="text-lg sm:text-xl md:text-2xl font-medium text-slate-500 dark:text-slate-400 mb-5 sm:mb-6 min-h-[2rem]">
+          <span id="typewriter" class="text-brand" aria-live="polite" aria-atomic="true"></span>
+        </p>
+
+        <p class="hero-copy text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-xl mb-8 sm:mb-10">
+          I build <strong class="text-slate-800 dark:text-white font-semibold">scalable, secure, and impactful systems</strong> — from real-time fintech platforms to ML/AI-powered tools — crafted with precision and shipped for the world.
+        </p>
+
+        <div class="hero-ctas flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-14">
+          <a href="{% url 'projects' %}"
+             class="btn-primary magnetic-btn group w-full sm:w-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+            <span class="flex items-center justify-center gap-2">
+              <i class="fas fa-rocket text-sm" aria-hidden="true"></i>
+              View My Work
+            </span>
+          </a>
+          <a href="{% url 'contact' %}"
+             class="btn-outline w-full sm:w-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+            <span class="flex items-center justify-center gap-2">
+              <i class="fas fa-paper-plane text-sm" aria-hidden="true"></i>
+              Let's Talk
+            </span>
+          </a>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 sm:gap-5 pt-6 sm:pt-8 border-t border-slate-200 dark:border-white/8"
+             aria-label="Career highlights">
+          <div>
+            <p class="stat-number text-3xl sm:text-4xl font-display"
+               data-counter data-target="5" data-suffix="+"
+               aria-label="5 or more years building">0</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 sm:mt-1.5 font-medium leading-tight">Years Building</p>
+          </div>
+          <div>
+            <p class="stat-number text-3xl sm:text-4xl font-display"
+               data-counter data-target="6" data-suffix=""
+               aria-label="6 or more projects shipped">0</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 sm:mt-1.5 font-medium leading-tight">Projects Shipped</p>
+          </div>
+          <div>
+            <p class="stat-number text-3xl sm:text-4xl font-display"
+               data-counter data-target="10" data-suffix="+"
+               aria-label="10 or more technologies">0</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 sm:mt-1.5 font-medium leading-tight">Technologies</p>
+          </div>
+        </div>
+      </div>
+
+      
+      <div class="flex flex-col items-center gap-6 sm:gap-8">
+
+        {# Orbit diagram card #}
+        <div class="w-full glass-card py-8 sm:py-10 flex items-center justify-center" aria-hidden="true">
+          <div class="hero-orbit-card">
+            {# Centre icon #}
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+              <div class="hero-orbit-centre rounded-2xl flex items-center justify-center"
+                   style="background:linear-gradient(135deg,#4f46e5,#22d3ee);box-shadow:0 0 40px rgba(79,70,229,0.45);">
+                <i class="fas fa-laptop-code text-white"></i>
+              </div>
+            </div>
+
+            {# Inner orbit #}
+            <div class="hero-orbit-ring hero-orbit-ring--inner">
+              <div class="hero-orbit-icon hero-orbit-icon--top">
+                <i class="fab fa-python" style="color:#3776AB;" title="Python"></i>
+              </div>
+              <div class="hero-orbit-icon hero-orbit-icon--bottom">
+                <i class="fab fa-react" style="color:#61DAFB;" title="React"></i>
+              </div>
+              <div class="hero-orbit-icon hero-orbit-icon--right">
+                <i class="fab fa-docker" style="color:#2496ED;" title="Docker"></i>
+              </div>
+              <div class="hero-orbit-icon hero-orbit-icon--left">
+                <i class="fab fa-php" style="color:#8892BE;" title="PHP / Laravel"></i>
+              </div>
+            </div>
+
+            {# Outer orbit #}
+            <div class="hero-orbit-ring hero-orbit-ring--outer">
+              <div class="hero-orbit-icon hero-orbit-icon--top">
+                <i class="fas fa-cloud" style="color:#22d3ee;" title="Cloud"></i>
+              </div>
+              <div class="hero-orbit-icon hero-orbit-icon--bottom">
+                <i class="fas fa-brain" style="color:#10b981;" title="AI / ML"></i>
+              </div>
+              <div class="hero-orbit-icon hero-orbit-icon--right">
+                <i class="fab fa-github text-slate-600 dark:text-slate-300" title="GitHub"></i>
+              </div>
+              <div class="hero-orbit-icon hero-orbit-icon--left">
+                <i class="fas fa-mobile-screen" style="color:#f59e0b;" title="Mobile"></i>
+              </div>
+            </div>
+
+            <div class="absolute inset-0 rounded-full pointer-events-none"
+                 style="background:radial-gradient(circle,rgba(79,70,229,0.08),transparent 70%);filter:blur(24px);"></div>
+          </div>
+        </div>
+
+        {# GitHub activity card #}
+        <div class="w-full max-w-xs sm:max-w-sm glass-card p-4 sm:p-5"
+             aria-label="GitHub contribution activity">
+          <div class="flex items-center justify-between mb-3">
+            <p class="text-xs font-mono uppercase tracking-widest text-slate-400">GitHub Activity</p>
+            <span id="contrib-total" class="font-mono text-xs text-brand font-semibold"></span>
+          </div>
+          <div class="relative" style="height:80px;">
+            <canvas id="contrib-line"
+                    role="img"
+                    aria-label="GitHub contributions chart for the last 12 weeks"></canvas>
+            <div id="contrib-loading" class="absolute inset-0 flex items-center justify-center">
+              <span class="w-5 h-5 border-2 border-brand border-t-transparent rounded-full animate-spin" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 mt-2 text-right">
+            Last 12 weeks &middot;
+            <a href="https://github.com/akolpaul2244"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="text-brand hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-brand rounded">
+              akolpaul2244
+            </a>
+          </p>
+        </div>
+
+        {# Social icons #}
+        <div class="flex items-center gap-3">
+          <a href="https://github.com/akolpaul2244"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+             aria-label="GitHub profile">
+            <i class="fab fa-github text-lg" aria-hidden="true"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/akol-paul-6b662a312/"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+             aria-label="LinkedIn profile">
+            <i class="fab fa-linkedin-in text-lg" aria-hidden="true"></i>
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&amp;to=paulakol97@gmail.com"
+             target="_blank"
+             rel="noopener noreferrer"
+             class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+             aria-label="Send email">
+            <i class="fas fa-envelope text-lg" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex justify-center mt-10 sm:mt-14" aria-hidden="true">
+      <div class="scroll-indicator opacity-40 dark:opacity-30"></div>
+    </div>
+  </div>
+</section>
+
+<div class="kente-divider mx-4 sm:mx-6 md:mx-auto md:max-w-5xl rounded-full my-0" aria-hidden="true"></div>
+
+{#  FEATURED PROJECTS  #}
+<section class="py-20 sm:py-28 bg-slate-50 dark:bg-ink-800 relative overflow-hidden"
+         aria-labelledby="featured-heading">
+  <div class="absolute inset-0 bg-kente opacity-25 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="section-label justify-center">
+        <i class="fas fa-star" aria-hidden="true"></i> Featured Work
+      </p>
+      <h2 id="featured-heading"
+          class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mt-2">
+        Projects That Matter
+      </h2>
+      <p class="mt-4 text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-base sm:text-lg">
+        Real-world systems built with precision, purpose, and production in mind.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {% for project in featured_projects %}
+      <a href="{% url 'project_detail' project.slug %}"
+         class="project-card tilt-card reveal delay-{{ forloop.counter }}00"
+         aria-label="{{ project.title }} — view case study">
+        <div class="overflow-hidden h-48 sm:h-52 relative flex-shrink-0">
+          {% if project.image %}
+          <img src="{{ project.image.url }}"
+               alt="{{ project.title }}"
+               width="400" height="208"
+               class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+               loading="lazy"
+               decoding="async">
+          {% else %}
+          <div class="w-full h-full flex items-center justify-center relative"
+               style="background:linear-gradient(135deg,#4f46e5,#22d3ee);">
+            <i class="fas fa-code text-5xl text-white/30" aria-hidden="true"></i>
+            <div class="absolute inset-0 bg-kente opacity-20"></div>
+          </div>
+          {% endif %}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+               aria-hidden="true"></div>
+        </div>
+        <div class="card-body p-5 sm:p-6">
+          <div class="flex flex-wrap gap-1.5 mb-3" aria-label="Technologies">
+            {% for tech in project.stack|slice:":3" %}
+            <span class="tech-tag">{{ tech }}</span>
+            {% endfor %}
+          </div>
+          <h3 class="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white mb-2">
+            {{ project.title }}
+          </h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+            {{ project.short_description }}
+          </p>
+          <div class="mt-auto pt-4 sm:pt-5 flex items-center text-brand text-sm font-semibold gap-1.5 group/link">
+            <span>View Case Study</span>
+            <i class="fas fa-arrow-right text-xs transition-transform group-hover/link:translate-x-1"
+               aria-hidden="true"></i>
+          </div>
+        </div>
+      </a>
+      {% endfor %}
+
+      {% for proj in demo_projects %}
+      <div class="project-card reveal delay-{{ forloop.counter }}00">
+        <div class="overflow-hidden h-48 sm:h-52 relative flex-shrink-0">
+          <div class="w-full h-full flex items-center justify-center relative"
+               style="background:linear-gradient(135deg,{% cycle '#4f46e5,#22d3ee' '#10b981,#22d3ee' '#f59e0b,#4f46e5' %});">
+            <i class="fas {% cycle 'fa-rocket' 'fa-brain' 'fa-shield-halved' %} text-5xl text-white/30"
+               aria-hidden="true"></i>
+            <div class="absolute inset-0 bg-kente opacity-20"></div>
+          </div>
+        </div>
+        <div class="card-body p-5 sm:p-6">
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            {% for tag in proj.stack %}
+            <span class="tech-tag">{{ tag }}</span>
+            {% endfor %}
+          </div>
+          <h3 class="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white mb-2">
+            {{ proj.title }}
+          </h3>
+          <p class="text-sm text-slate-500 dark:text-slate-400 line-clamp-2 leading-relaxed">
+            {{ proj.description }}
+          </p>
+          <div class="mt-auto pt-4 sm:pt-5 flex items-center text-brand text-sm font-semibold gap-1.5">
+            <span>View Case Study</span>
+            <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    {% if featured_projects %}
+    <div class="text-center mt-10 sm:mt-12 reveal">
+      <a href="{% url 'projects' %}"
+         class="btn-outline inline-flex focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+        <span class="flex items-center gap-2">
+          <i class="fas fa-table-cells text-sm" aria-hidden="true"></i>
+          View All Projects
+        </span>
+      </a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+{#  EXPERTISE  #}
+<section class="py-20 sm:py-28 bg-white dark:bg-ink" aria-labelledby="expertise-heading">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="section-label justify-center">
+        <i class="fas fa-bolt" aria-hidden="true"></i> Expertise
+      </p>
+      <h2 id="expertise-heading"
+          class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mt-2">
+        What I Build
+      </h2>
+      <p class="mt-4 text-slate-500 dark:text-slate-400 max-w-xl mx-auto text-sm sm:text-base">
+        End-to-end delivery — from architecture decisions to production deployments.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+      <div class="glass-card p-6 sm:p-7 reveal delay-100">
+        <div class="w-11 sm:w-12 h-11 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
+             style="background:linear-gradient(135deg,rgba(79,70,229,0.12),rgba(34,211,238,0.08));border:1px solid rgba(79,70,229,0.15);"
+             aria-hidden="true">
+          <i class="fas fa-server text-brand text-lg sm:text-xl"></i>
+        </div>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">
+          Backend Systems
+        </h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Scalable Django &amp; Laravel APIs, real-time WebSocket platforms, and secure data pipelines built for production.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 sm:p-7 reveal delay-200">
+        <div class="w-11 sm:w-12 h-11 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
+             style="background:linear-gradient(135deg,rgba(34,211,238,0.12),rgba(79,70,229,0.08));border:1px solid rgba(34,211,238,0.15);"
+             aria-hidden="true">
+          <i class="fab fa-react text-cyan text-lg sm:text-xl"></i>
+        </div>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">
+          Frontend Interfaces
+        </h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          React &amp; Tailwind CSS frontends with HTMX and Alpine.js — fast, accessible, and polished across all devices.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 sm:p-7 reveal delay-300">
+        <div class="w-11 sm:w-12 h-11 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
+             style="background:linear-gradient(135deg,rgba(16,185,129,0.12),rgba(34,211,238,0.08));border:1px solid rgba(16,185,129,0.15);"
+             aria-hidden="true">
+          <i class="fas fa-brain text-jade text-lg sm:text-xl"></i>
+        </div>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">
+          AI &amp; ML Systems
+        </h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          NLP pipelines, multilingual speech models, and knowledge distillation for real-world, low-resource deployments.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 sm:p-7 reveal delay-400">
+        <div class="w-11 sm:w-12 h-11 sm:h-12 rounded-xl flex items-center justify-center mb-4 sm:mb-5"
+             style="background:linear-gradient(135deg,rgba(245,158,11,0.12),rgba(16,185,129,0.08));border:1px solid rgba(245,158,11,0.15);"
+             aria-hidden="true">
+          <i class="fas fa-shield-halved text-amber text-lg sm:text-xl"></i>
+        </div>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-2">
+          Humanitarian Tech
+        </h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Digital systems for NGOs, refugee services, and community platforms — optimised for constrained-bandwidth environments.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{#  CREDENTIALS STRIP  #}
+<section class="py-16 sm:py-20 bg-slate-50 dark:bg-ink-800 relative overflow-hidden"
+         aria-labelledby="credentials-heading">
+  <div class="absolute inset-0 bg-kente opacity-20 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 id="credentials-heading" class="sr-only">Credentials and background</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+
+      <div class="glass-card p-6 sm:p-7 reveal delay-100">
+        <div class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl flex items-center justify-center mb-4 sm:mb-5 text-brand"
+             style="background:rgba(79,70,229,0.1);" aria-hidden="true">
+          <i class="fas fa-graduation-cap text-base sm:text-lg"></i>
+        </div>
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-1">Education</p>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-1">
+          BSc Software Engineering
+        </h3>
+        <p class="text-sm text-brand font-semibold mb-3">Makerere University &middot; Final Year</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Covering systems architecture, AI/ML, security, and enterprise engineering practice at Uganda's premier research university.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 sm:p-7 reveal delay-200">
+        <div class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl flex items-center justify-center mb-4 sm:mb-5 text-jade"
+             style="background:rgba(16,185,129,0.1);" aria-hidden="true">
+          <i class="fas fa-building-columns text-base sm:text-lg"></i>
+        </div>
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-1">Industry Experience</p>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-1">
+          NSSF Uganda — Software Engineer Intern
+        </h3>
+        <p class="text-sm text-jade font-semibold mb-3">Grade: Distinction &middot; Jun – Aug 2025</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Three-month attachment at East Africa's largest social security institution — contributing to mission-critical enterprise systems.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 sm:p-7 reveal delay-300 sm:col-span-2 lg:col-span-1">
+        <div class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl flex items-center justify-center mb-4 sm:mb-5 text-amber"
+             style="background:rgba(245,158,11,0.1);" aria-hidden="true">
+          <i class="fas fa-shield-halved text-base sm:text-lg"></i>
+        </div>
+        <p class="font-mono text-xs uppercase tracking-widest text-slate-400 mb-1">Specialisation</p>
+        <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white mb-1">
+          Security-Conscious by Default
+        </h3>
+        <p class="text-sm text-amber font-semibold mb-3">OWASP ASVS &middot; JWT &middot; RBAC &middot; CSP</p>
+        <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+          Authentication, authorisation, and input validation are standard across every system built — not afterthoughts.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{#  CTA BANNER  #}
+<section class="py-20 sm:py-24 relative overflow-hidden" aria-labelledby="cta-heading">
+  <div class="absolute inset-0"
+       style="background:linear-gradient(135deg,#4f46e5 0%,#22d3ee 100%);"
+       aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-kente opacity-15 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="relative max-w-3xl mx-auto px-4 sm:px-6 text-center reveal">
+    <p class="font-mono text-xs uppercase tracking-widest text-white/60 mb-4">
+      Ready to collaborate?
+    </p>
+    <h2 id="cta-heading"
+        class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-5 sm:mb-6">
+      Let's Build Something<br class="hidden sm:block"> Remarkable Together
+    </h2>
+    <p class="text-white/70 text-base sm:text-lg mb-8 sm:mb-10 leading-relaxed max-w-xl mx-auto">
+      Available for freelance projects, full-time roles, and high-impact collaborations — especially in fintech, humanitarian tech, and AI.
+    </p>
+    <div class="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+      <a href="{% url 'contact' %}"
+         class="inline-flex items-center justify-center gap-2 bg-white text-brand font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition hover:-translate-y-1 hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70">
+        <i class="fas fa-paper-plane text-sm" aria-hidden="true"></i>
+        Start a Conversation
+      </a>
+      <a href="{% url 'projects' %}"
+         class="inline-flex items-center justify-center gap-2 bg-white/10 border border-white/20 text-white font-semibold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl transition hover:bg-white/20 hover:-translate-y-1 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-white/50">
+        <i class="fas fa-folder-open text-sm" aria-hidden="true"></i>
+        See My Work
+      </a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  'use strict';
+
+  var GITHUB_USER = 'akolpaul2244';
+  var contribChart = null;
+
+  function buildWeekLabels() {
+    var labels = [];
+    var now = new Date();
+    for (var i = 11; i >= 0; i--) {
+      var d = new Date(now.getTime() - i * 7 * 24 * 60 * 60 * 1000);
+      labels.push(d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }));
+    }
+    return labels;
+  }
+
+  function getWeekBuckets(events) {
+    var now    = Date.now();
+    var MS_WEEK = 7 * 24 * 60 * 60 * 1000;
+    var NUM    = 12;
+    var buckets = new Array(NUM).fill(0);
+    events.forEach(function (ev) {
+      var age = now - new Date(ev.created_at).getTime();
+      var idx = Math.floor(age / MS_WEEK);
+      if (idx >= 0 && idx < NUM) buckets[NUM - 1 - idx]++;
+    });
+    return buckets;
+  }
+
+  function renderChart(data, labels) {
+    var canvas  = document.getElementById('contrib-line');
+    var loading = document.getElementById('contrib-loading');
+    if (!canvas) return;
+    if (loading) loading.style.display = 'none';
+
+    var isDark = document.documentElement.classList.contains('dark');
+    var total  = data.reduce(function (a, b) { return a + b; }, 0);
+    var el     = document.getElementById('contrib-total');
+    if (el) el.textContent = total + ' events';
+
+    if (contribChart) contribChart.destroy();
+
+    contribChart = new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Activity',
+          data: data,
+          fill: true,
+          tension: 0.42,
+          borderColor: '#4f46e5',
+          borderWidth: 2,
+          pointRadius: 2.5,
+          pointHoverRadius: 5,
+          pointBackgroundColor: '#4f46e5',
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1.5,
+          backgroundColor: function (ctx) {
+            var g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 80);
+            g.addColorStop(0, 'rgba(79,70,229,0.22)');
+            g.addColorStop(1, 'rgba(79,70,229,0)');
+            return g;
+          },
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        animation: { duration: 900, easing: 'easeInOutQuart' },
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: isDark ? '#1a1330' : '#fff',
+            titleColor: isDark ? '#e2e8f0' : '#0f172a',
+            bodyColor:  isDark ? '#94a3b8' : '#64748b',
+            borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0',
+            borderWidth: 1,
+            padding: 10,
+            callbacks: {
+              label: function (c) { return ' ' + c.raw + ' events'; },
+            },
+          },
+        },
+        scales: {
+          x: { display: false },
+          y: { display: false, beginAtZero: true },
+        },
+      },
+    });
+  }
+
+  function fallback() {
+    renderChart([2, 5, 3, 8, 6, 11, 4, 9, 7, 13, 6, 8], buildWeekLabels());
+  }
+
+  async function loadActivity() {
+    try {
+      var all = [];
+      for (var page = 1; page <= 3; page++) {
+        var res = await fetch(
+          'https://api.github.com/users/' + encodeURIComponent(GITHUB_USER) +
+          '/events/public?per_page=100&page=' + page,
+          { headers: { 'Accept': 'application/vnd.github+json' } }
+        );
+        if (!res.ok) break;
+        var batch = await res.json();
+        if (!Array.isArray(batch) || !batch.length) break;
+        all = all.concat(batch);
+      }
+      if (all.length) {
+        renderChart(getWeekBuckets(all), buildWeekLabels());
+      } else {
+        fallback();
+      }
+    } catch (_) {
+      fallback();
+    }
+  }
+
+  function init() {
+    if (typeof Chart !== 'undefined') {
+      loadActivity();
+    } else {
+      var s = document.querySelector('script[src*="chart.js"]');
+      if (s) s.addEventListener('load', loadActivity);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+}());
+</script>
+{% endblock %}

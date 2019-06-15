@@ -1,0 +1,626 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Skills — Akol Paul{% endblock %}
+{% block meta_description %}Technical skills and toolkit of Akol Paul — backend, frontend, AI/ML, DevOps, and infrastructure.{% endblock %}
+{% block og_title %}Skills — Akol Paul{% endblock %}
+{% block og_description %}Years of deliberate practice across backend, frontend, AI/ML, and infrastructure.{% endblock %}
+{% block canonical %}https://akolpaul.dev/skills/{% endblock %}
+
+{% block extra_css %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
+<style>
+  @keyframes orbitRotate    { to { transform: translate(-50%,-50%) rotate(360deg);  } }
+  @keyframes counterRotate  { to { transform: translateX(-50%) rotate(-360deg);     } }
+  @keyframes counterRotateY { to { transform: translateY(-50%) rotate(-360deg);     } }
+
+  
+  .orbit-wrap {
+    --orbit-size: clamp(180px, 62vw, 384px);
+    position: relative;
+    width: var(--orbit-size);
+    height: var(--orbit-size);
+    margin: 0 auto;
+  }
+
+  .orbit-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    border: 1px dashed;
+  }
+
+  .orbit-ring--inner {
+    width: calc(var(--orbit-size) * 0.5);
+    height: calc(var(--orbit-size) * 0.5);
+    border-color: rgba(79, 70, 229, 0.2);
+    animation: orbitRotate 15s linear infinite;
+  }
+
+  .orbit-ring--outer {
+    width: calc(var(--orbit-size) * 0.75);
+    height: calc(var(--orbit-size) * 0.75);
+    border-color: rgba(34, 211, 238, 0.15);
+    animation: orbitRotate 25s linear infinite reverse;
+  }
+
+  
+  .orbit-node {
+    position: absolute;
+    width: clamp(26px, calc(var(--orbit-size) * 0.094), 36px);
+    height: clamp(26px, calc(var(--orbit-size) * 0.094), 36px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--orbit-node-bg, rgba(255, 255, 255, 0.08));
+    backdrop-filter: blur(4px);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .orbit-node .fas,
+  .orbit-node .fab {
+    font-size: clamp(0.7rem, calc(var(--orbit-size) * 0.026), 1rem);
+  }
+
+  .orbit-node--top    { top: 0;   left: 50%; }
+  .orbit-node--bottom { bottom: 0; left: 50%; }
+  .orbit-node--right  { top: 50%; right: 0;  }
+  .orbit-node--left   { top: 50%; left: 0;   }
+
+  .orbit-node--top,
+  .orbit-node--bottom {
+    transform: translate(-50%, -50%);
+  }
+  .orbit-node--right,
+  .orbit-node--left {
+    transform: translate(50%, -50%);
+  }
+  .orbit-node--left {
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-ring--inner .orbit-node { animation: counterRotate  15s linear infinite; }
+  .orbit-ring--outer .orbit-node { animation: counterRotate  25s linear infinite reverse; }
+
+  .orbit-ring--inner .orbit-node--right,
+  .orbit-ring--inner .orbit-node--left {
+    animation: counterRotateY 15s linear infinite;
+  }
+  .orbit-ring--outer .orbit-node--right,
+  .orbit-ring--outer .orbit-node--left {
+    animation: counterRotateY 25s linear infinite reverse;
+  }
+
+  .orbit-centre {
+    width: clamp(48px, calc(var(--orbit-size) * 0.19), 72px);
+    height: clamp(48px, calc(var(--orbit-size) * 0.19), 72px);
+  }
+  .orbit-centre .fas {
+    font-size: clamp(1rem, calc(var(--orbit-size) * 0.039), 1.5rem);
+  }
+
+  .skill-bar-fill {
+    background: linear-gradient(90deg, #4f46e5, #22d3ee);
+    transition: width 1s cubic-bezier(.4, 0, .2, 1);
+  }
+
+  
+  .radar-container {
+    position: relative;
+    width: min(100%, 360px);
+    margin: 0 auto;
+  }
+
+  @media (max-width: 480px) {
+    .radar-container {
+      width: min(88vw, 300px);
+    }
+  }
+
+  
+  .competency-visual-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+  }
+
+  @media (min-width: 640px) {
+    .competency-visual-card {
+      padding: 2.5rem 2rem;
+    }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+{#  HERO  #}
+<section class="relative py-20 sm:py-28 hero-bg overflow-hidden"
+         aria-labelledby="skills-hero-heading">
+
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div class="absolute -top-32 -right-20 w-96 h-96 rounded-full opacity-10 blur-3xl"
+         style="background: radial-gradient(circle, #4f46e5, transparent 70%);"></div>
+    <div class="absolute -bottom-20 -left-20 w-80 h-80 rounded-full opacity-10 blur-3xl"
+         style="background: radial-gradient(circle, #22d3ee, transparent 70%);"></div>
+    <div class="absolute inset-0 opacity-5"
+         style="background-image: radial-gradient(circle, rgba(79,70,229,0.4) 1px, transparent 1px);
+                background-size: 32px 32px;"></div>
+  </div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <p class="section-label justify-center reveal">
+      <span class="fas fa-layer-group" aria-hidden="true"></span>
+      Technical Skills
+    </p>
+    <h1 id="skills-hero-heading"
+        class="font-display text-4xl sm:text-5xl md:text-6xl font-bold
+               text-slate-900 dark:text-white mt-3 mb-5 reveal delay-100">
+      The Toolkit That<br>
+      <span class="hero-name">Ships Products</span>
+    </h1>
+    <p class="text-lg sm:text-xl text-slate-500 dark:text-slate-400 max-w-xl mx-auto reveal delay-200">
+      Years of deliberate practice across backend, frontend, AI&nbsp;&amp;&nbsp;ML, and infrastructure —
+      built through real products shipped to real users.
+    </p>
+
+    {# Quick-stat strip #}
+    <div class="mt-10 inline-flex flex-wrap justify-center gap-6 sm:gap-10 reveal delay-300"
+         aria-label="Quick statistics">
+      <div class="text-center">
+        <p class="font-display text-3xl sm:text-4xl font-bold text-brand">5+</p>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Years Active</p>
+      </div>
+      <div class="w-px bg-slate-200 dark:bg-white/10 self-stretch hidden sm:block" aria-hidden="true"></div>
+      <div class="text-center">
+        <p class="font-display text-3xl sm:text-4xl font-bold text-brand">20+</p>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Projects Shipped</p>
+      </div>
+      <div class="w-px bg-slate-200 dark:bg-white/10 self-stretch hidden sm:block" aria-hidden="true"></div>
+      <div class="text-center">
+        <p class="font-display text-3xl sm:text-4xl font-bold text-brand">8+</p>
+        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Domains Covered</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="mx-4 sm:mx-6 md:mx-auto md:max-w-5xl h-px rounded-full"
+     style="background: linear-gradient(90deg, transparent, rgba(79,70,229,0.3), rgba(34,211,238,0.3), transparent);"
+     aria-hidden="true"></div>
+
+{#  ORBIT + RADAR  #}
+<section class="py-16 sm:py-24 bg-white dark:bg-ink overflow-hidden"
+         aria-labelledby="competencies-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <div class="text-center mb-12 reveal">
+      <p class="section-label justify-center">
+        <span class="fas fa-chart-area" aria-hidden="true"></span>
+        Proficiency Overview
+      </p>
+      <h2 id="competencies-heading"
+          class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+        Core Competencies
+      </h2>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+
+      {# Orbit diagram — decorative, now in its own card #}
+      <div class="glass-card competency-visual-card reveal-left" aria-hidden="true">
+        <div class="orbit-wrap">
+
+          {# Centre #}
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
+            <div class="orbit-centre rounded-2xl flex items-center justify-center shadow-brand"
+                 style="background: linear-gradient(135deg, #4f46e5, #22d3ee);">
+              <span class="fas fa-laptop-code text-white"></span>
+            </div>
+          </div>
+
+          {# Inner ring #}
+          <div class="orbit-ring orbit-ring--inner">
+            <div class="orbit-node orbit-node--top">
+              <span class="fab fa-python" style="color:#3776AB;" title="Python"></span>
+            </div>
+            <div class="orbit-node orbit-node--bottom">
+              <span class="fab fa-react" style="color:#61DAFB;" title="React"></span>
+            </div>
+            <div class="orbit-node orbit-node--right">
+              <span class="fab fa-php" style="color:#8892BE;" title="PHP / Laravel"></span>
+            </div>
+            <div class="orbit-node orbit-node--left">
+              <span class="fab fa-docker" style="color:#2496ED;" title="Docker"></span>
+            </div>
+          </div>
+
+          {# Outer ring #}
+          <div class="orbit-ring orbit-ring--outer">
+            <div class="orbit-node orbit-node--top">
+              <span class="fas fa-cloud" style="color:#22d3ee;" title="Cloud"></span>
+            </div>
+            <div class="orbit-node orbit-node--bottom">
+              <span class="fas fa-brain" style="color:#10b981;" title="AI / ML"></span>
+            </div>
+            <div class="orbit-node orbit-node--right">
+              <span class="fab fa-github" title="Git / GitHub"></span>
+            </div>
+            <div class="orbit-node orbit-node--left">
+              <span class="fas fa-mobile-screen" style="color:#f59e0b;" title="Mobile / PWA"></span>
+            </div>
+          </div>
+
+          <div class="absolute inset-0 rounded-full pointer-events-none"
+               style="background:radial-gradient(circle,rgba(79,70,229,0.06),transparent 70%);filter:blur(20px);"></div>
+        </div>
+      </div>
+
+      {# Radar chart — now in its own matching card #}
+      <div class="glass-card competency-visual-card reveal-right">
+        <div class="radar-container">
+          <canvas id="skillRadar"
+                  role="img"
+                  aria-label="Skill proficiency radar chart covering Django, Python, React,
+                              PostgreSQL, Docker, NLP/AI, WebSockets, Laravel, REST APIs, and Security">
+          </canvas>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="mx-4 sm:mx-6 md:mx-auto md:max-w-5xl h-px rounded-full"
+     style="background: linear-gradient(90deg, transparent, rgba(79,70,229,0.15), rgba(34,211,238,0.15), transparent);"
+     aria-hidden="true"></div>
+
+{#  SKILLS BREAKDOWN  #}
+<section class="py-16 sm:py-20 bg-slate-50 dark:bg-ink-800"
+         aria-labelledby="breakdown-heading">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="section-label justify-center">
+        <span class="fas fa-bars-progress" aria-hidden="true"></span>
+        Deep Dives
+      </p>
+      <h2 id="breakdown-heading"
+          class="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+        Skills Breakdown
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+
+      {% for cat, skills in grouped_skills.items %}
+      <div class="glass-card p-6 sm:p-8 reveal">
+        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6 capitalize
+                   flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-brand/10 flex items-center justify-center flex-shrink-0"
+                aria-hidden="true">
+            <span class="w-2 h-2 rounded-sm bg-brand inline-block"></span>
+          </span>
+          {{ cat }}
+        </h3>
+        <div class="space-y-5">
+          {% for skill in skills %}
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span class="font-medium text-slate-700 dark:text-slate-300">{{ skill.name }}</span>
+              <span class="font-mono text-brand text-xs">{{ skill.proficiency }}%</span>
+            </div>
+            <div class="h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden"
+                 role="progressbar"
+                 aria-valuenow="{{ skill.proficiency }}"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-label="{{ skill.name }} proficiency {{ skill.proficiency }}%">
+              <div class="skill-bar-fill h-full rounded-full" style="width:{{ skill.proficiency }}%;"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% empty %}
+
+      {# Fallback demo cards #}
+      <div class="glass-card p-6 sm:p-8 reveal">
+        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6
+                   flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-brand/10 flex items-center justify-center flex-shrink-0"
+                aria-hidden="true">
+            <span class="w-2 h-2 rounded-sm bg-brand inline-block"></span>
+          </span>
+          Backend
+        </h3>
+        <div class="space-y-5">
+          {% for item in demo_backend %}
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span class="font-medium text-slate-700 dark:text-slate-300">{{ item.name }}</span>
+              <span class="font-mono text-brand text-xs">{{ item.proficiency }}%</span>
+            </div>
+            <div class="h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden"
+                 role="progressbar"
+                 aria-valuenow="{{ item.proficiency }}"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-label="{{ item.name }} {{ item.proficiency }}%">
+              <div class="skill-bar-fill h-full rounded-full" style="width:{{ item.proficiency }}%;"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="glass-card p-6 sm:p-8 reveal delay-100">
+        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6
+                   flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-brand/10 flex items-center justify-center flex-shrink-0"
+                aria-hidden="true">
+            <span class="w-2 h-2 rounded-sm bg-brand inline-block"></span>
+          </span>
+          Frontend
+        </h3>
+        <div class="space-y-5">
+          {% for item in demo_frontend %}
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span class="font-medium text-slate-700 dark:text-slate-300">{{ item.name }}</span>
+              <span class="font-mono text-brand text-xs">{{ item.proficiency }}%</span>
+            </div>
+            <div class="h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden"
+                 role="progressbar"
+                 aria-valuenow="{{ item.proficiency }}"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-label="{{ item.name }} {{ item.proficiency }}%">
+              <div class="skill-bar-fill h-full rounded-full" style="width:{{ item.proficiency }}%;"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="glass-card p-6 sm:p-8 reveal delay-200">
+        <h3 class="font-display font-bold text-lg text-slate-900 dark:text-white mb-6
+                   flex items-center gap-2">
+          <span class="w-6 h-6 rounded-md bg-brand/10 flex items-center justify-center flex-shrink-0"
+                aria-hidden="true">
+            <span class="w-2 h-2 rounded-sm bg-brand inline-block"></span>
+          </span>
+          AI / ML
+        </h3>
+        <div class="space-y-5">
+          {% for item in demo_ai %}
+          <div>
+            <div class="flex justify-between text-sm mb-2">
+              <span class="font-medium text-slate-700 dark:text-slate-300">{{ item.name }}</span>
+              <span class="font-mono text-brand text-xs">{{ item.proficiency }}%</span>
+            </div>
+            <div class="h-1.5 bg-slate-200 dark:bg-white/10 rounded-full overflow-hidden"
+                 role="progressbar"
+                 aria-valuenow="{{ item.proficiency }}"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 aria-label="{{ item.name }} {{ item.proficiency }}%">
+              <div class="skill-bar-fill h-full rounded-full" style="width:{{ item.proficiency }}%;"></div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── TOOLS CLOUD  #}
+<section class="py-16 sm:py-20 bg-white dark:bg-ink" aria-labelledby="tools-heading">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="reveal mb-10 sm:mb-12">
+      <p class="section-label justify-center">
+        <span class="fas fa-wrench" aria-hidden="true"></span>
+        Ecosystem
+      </p>
+      <h2 id="tools-heading"
+          class="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+        Tools I Work With
+      </h2>
+    </div>
+
+    <ul class="flex flex-wrap justify-center gap-2 sm:gap-3 reveal list-none p-0 m-0"
+        aria-label="Tools and technologies">
+      {% for tool in tools %}
+      <li>
+        <span class="glass-card inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5
+                     text-sm font-medium text-slate-700 dark:text-slate-300
+                     hover:border-brand/30 hover:text-brand transition-all">
+          {{ tool }}
+        </span>
+      </li>
+      {% empty %}
+      {% for tool in demo_tools %}
+      <li>
+        <span class="glass-card inline-flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-2.5
+                     text-sm font-medium text-slate-700 dark:text-slate-300
+                     hover:border-brand/30 hover:text-brand transition-all">
+          {{ tool }}
+        </span>
+      </li>
+      {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{# ── APPROACH STRIP  #}
+<section class="py-14 sm:py-20 bg-slate-50 dark:bg-ink-800"
+         aria-labelledby="approach-heading">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="reveal mb-10">
+      <p class="section-label justify-center">
+        <span class="fas fa-lightbulb" aria-hidden="true"></span>
+        Engineering Philosophy
+      </p>
+      <h2 id="approach-heading"
+          class="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+        How I Work
+      </h2>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-6 reveal">
+
+      <div class="glass-card p-6 text-left">
+        <span class="fas fa-shield-halved text-brand text-2xl mb-4 block" aria-hidden="true"></span>
+        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-2">Security by Default</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Input sanitisation, rate limiting, CSRF protection, and principle-of-least-privilege baked
+          in from the first line of every project.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 text-left">
+        <span class="fas fa-boxes-stacked text-brand text-2xl mb-4 block" aria-hidden="true"></span>
+        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-2">Production-Grade Output</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Every deliverable is built to run in production: structured error handling, logging, and
+          observability hooks included by default — not as afterthoughts.
+        </p>
+      </div>
+
+      <div class="glass-card p-6 text-left">
+        <span class="fas fa-bolt text-brand text-2xl mb-4 block" aria-hidden="true"></span>
+        <h3 class="font-display font-bold text-slate-900 dark:text-white mb-2">Iterative Delivery</h3>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Shipping working software early and often. Each iteration is stable, tested, and ready for
+          real users — not just demo-ready.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  'use strict';
+
+  function initRadar() {
+    var canvas = document.getElementById('skillRadar');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    if (canvas._chartInstance) {
+      canvas._chartInstance.destroy();
+      canvas._chartInstance = null;
+    }
+
+    var isDark        = document.documentElement.classList.contains('dark');
+    var gridColor      = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)';
+    var textColor      = isDark ? '#94a3b8' : '#64748b';
+    var tooltipBg      = isDark ? '#1a1330' : '#ffffff';
+    var tooltipTitle   = isDark ? '#e2e8f0' : '#0f172a';
+    var tooltipBody    = isDark ? '#94a3b8' : '#64748b';
+    var tooltipBorder  = isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0';
+    var isSmallScreen  = window.innerWidth < 480;
+
+    canvas._chartInstance = new Chart(canvas, {
+      type: 'radar',
+      data: {
+        labels: [
+          'Django', 'Python', 'React', 'PostgreSQL', 'Docker',
+          'NLP/AI', 'WebSockets', 'Laravel', 'REST APIs', 'Security',
+        ],
+        datasets: [{
+          label: 'Proficiency',
+          data: [92, 90, 78, 85, 78, 82, 78, 82, 92, 75],
+          backgroundColor:           'rgba(79,70,229,0.12)',
+          borderColor:               '#4f46e5',
+          borderWidth:               2.5,
+          pointBackgroundColor:      '#4f46e5',
+          pointBorderColor:          '#fff',
+          pointBorderWidth:          2,
+          pointRadius:               isSmallScreen ? 3 : 4,
+          pointHoverRadius:          isSmallScreen ? 5 : 6,
+          pointHoverBackgroundColor: '#22d3ee',
+          pointHoverBorderColor:     '#fff',
+        }],
+      },
+      options: {
+        responsive:          true,
+        maintainAspectRatio: true,
+        aspectRatio:         1,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: tooltipBg,
+            titleColor:      tooltipTitle,
+            bodyColor:       tooltipBody,
+            borderColor:     tooltipBorder,
+            borderWidth:     1,
+            padding:         12,
+            callbacks: {
+              label: function (ctx) { return ' ' + ctx.raw + '% proficiency'; },
+            },
+          },
+        },
+        scales: {
+          r: {
+            angleLines:  { color: gridColor },
+            grid:        { color: gridColor },
+            pointLabels: {
+              color: textColor,
+              font:  {
+                family: '"Outfit", sans-serif',
+                size:   isSmallScreen ? 9 : 11,
+                weight: '500',
+              },
+            },
+            ticks:        { display: false },
+            suggestedMin: 0,
+            suggestedMax: 100,
+          },
+        },
+      },
+    });
+  }
+
+  function tryInit() {
+    if (typeof Chart !== 'undefined') {
+      initRadar();
+    } else {
+      var s = document.querySelector('script[src*="chart.js"]');
+      if (s) { s.addEventListener('load', initRadar); }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tryInit);
+  } else {
+    tryInit();
+  }
+
+  var lastIsSmall = window.innerWidth < 480;
+  var resizeTimer = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      var nowIsSmall = window.innerWidth < 480;
+      if (nowIsSmall !== lastIsSmall) {
+        lastIsSmall = nowIsSmall;
+        initRadar();
+      }
+    }, 200);
+  });
+}());
+</script>
+{% endblock %}

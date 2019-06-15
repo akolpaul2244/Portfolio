@@ -1,0 +1,485 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Akol Paul — Software Engineer{% endblock %}
+{% block meta_description %}Akol Paul is a Software Engineer specialising in Django, React, AI/ML, and building production-grade software systems. Final-year BSc Software Engineering student with internship experience at NSSF Uganda.{% endblock %}
+{% block og_title %}About Akol Paul — Software Engineer{% endblock %}
+{% block og_description %}Engineer and problem-solver building scalable, secure software systems that create measurable human value — shipped for the world.{% endblock %}
+{% block canonical %}https://akolpaul.dev/about/{% endblock %}
+
+{% block content %}
+
+{# ─── HERO ─────────────────────────────────────────────────────────────────── #}
+<section class="relative py-24 sm:py-28 hero-bg overflow-hidden" aria-label="About hero">
+  <canvas id="particles-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+  <div class="absolute inset-0 bg-kente opacity-20 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+    <p class="section-label justify-center reveal">About Me</p>
+    <h1 class="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight mt-3 mb-5 sm:mb-6 reveal delay-100">
+      Engineer.<br>
+      <span class="hero-name">Innovator. Builder. Problem-Solver.</span>
+    </h1>
+    <p class="text-base sm:text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed reveal delay-200">
+      Software Engineer with hands-on production experience across fintech, real-time data platforms, humanitarian technology, and ML/AI — building systems that solve real problems and ship with purpose.
+    </p>
+  </div>
+</section>
+
+<div class="kente-divider mx-4 sm:mx-6 md:mx-auto md:max-w-5xl rounded-full" aria-hidden="true"></div>
+
+{# ─── WHO I AM ─────────────────────────────────────────────────────────────── #}
+<section class="py-20 sm:py-24 bg-white dark:bg-ink">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+
+      {# Profile image column #}
+      <div class="reveal reveal-left order-2 lg:order-1">
+        <div class="relative">
+          <img src="{% static 'images/profile.jpg' %}"
+               alt="Akol Paul, Software Engineer"
+               class="w-full max-w-xs sm:max-w-sm md:max-w-md rounded-3xl mx-auto block"
+               style="box-shadow:0 30px 80px rgba(79,70,229,0.18);"
+               loading="lazy"
+               decoding="async"
+               width="448"
+               height="448">
+          <div class="kente-divider mt-6 mx-auto max-w-xs sm:max-w-sm md:max-w-md opacity-60"
+               aria-hidden="true"></div>
+
+          <div class="mt-6 flex justify-center gap-3">
+            <a href="https://github.com/akolpaul2244"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+               aria-label="GitHub profile">
+              <i class="fab fa-github text-lg" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/akol-paul-6b662a312/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+               aria-label="LinkedIn profile">
+              <i class="fab fa-linkedin-in text-lg" aria-hidden="true"></i>
+            </a>
+            <a href="https://mail.google.com/mail/?view=cm&amp;to=paulakol97@gmail.com"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+               aria-label="Send email">
+              <i class="fas fa-envelope text-lg" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {# Bio column #}
+      <div class="reveal reveal-right order-1 lg:order-2">
+        <p class="section-label">Who I Am</p>
+        <h2 class="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-5 sm:mb-6 leading-tight">
+          Building bridges between<br>technology and impact
+        </h2>
+        <div class="space-y-4 text-sm sm:text-base text-slate-600 dark:text-slate-400 leading-relaxed">
+          <p>
+            I'm Akol Paul, a Software Engineer and final-year
+            <strong class="text-slate-800 dark:text-white">BSc Software Engineering</strong>
+            student at <strong class="text-slate-800 dark:text-white">Makerere University</strong>
+            — one of East Africa's leading research institutions.
+          </p>
+          <p>
+            My work spans backend systems, full-stack web development, and AI/ML, with a focus on
+            building technology that solves real challenges at scale. I completed a formal
+            <strong class="text-slate-800 dark:text-white">internship at
+              <a href="https://www.nssfug.org"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 class="text-brand hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-brand rounded">
+                NSSF Uganda
+              </a>
+            </strong>
+            — one of East Africa's largest social security institutions — where I contributed to
+            enterprise-grade systems serving over 4 million users.
+          </p>
+          <p>
+            Whether it's a real-time fintech platform, a multilingual NLP system, or a data pipeline
+            running under pressure, every line of code I write is driven by a conviction that
+            technology should create measurable human value.
+          </p>
+        </div>
+
+        <dl class="mt-7 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+          <div class="glass-card p-4">
+            <i class="fas fa-location-dot text-brand text-sm mb-1" aria-hidden="true"></i>
+            <dt class="text-xs text-slate-400 mb-0.5">Location</dt>
+            <dd class="font-semibold text-slate-800 dark:text-white text-sm">Kampala, Uganda</dd>
+          </div>
+          <div class="glass-card p-4">
+            <i class="fas fa-language text-brand text-sm mb-1" aria-hidden="true"></i>
+            <dt class="text-xs text-slate-400 mb-0.5">Languages</dt>
+            <dd class="font-semibold text-slate-800 dark:text-white text-sm">English · Ateso · Luganda</dd>
+          </div>
+          <div class="glass-card p-4 sm:col-span-2">
+            <i class="fas fa-code text-brand text-sm mb-1" aria-hidden="true"></i>
+            <dt class="text-xs text-slate-400 mb-0.5">Focus Areas</dt>
+            <dd class="font-semibold text-slate-800 dark:text-white text-sm">
+              Django · Laravel · React · AI/ML · Fintech · CI/CD
+            </dd>
+          </div>
+          <div class="glass-card p-4 sm:col-span-2">
+            <i class="fas fa-circle-check text-jade text-sm mb-1" aria-hidden="true"></i>
+            <dt class="text-xs text-slate-400 mb-0.5">Status</dt>
+            <dd class="font-semibold text-jade text-sm flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse inline-block"
+                    aria-hidden="true"></span>
+              Open to Opportunities — Remote &amp; On-site
+            </dd>
+          </div>
+        </dl>
+
+        <div class="mt-7 sm:mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
+          <a href="{% url 'contact' %}"
+             class="btn-primary inline-flex justify-center sm:justify-start focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+            <span class="flex items-center gap-2">
+              <i class="fas fa-paper-plane text-sm" aria-hidden="true"></i>
+              Get In Touch
+            </span>
+          </a>
+          <a href="{% url 'projects' %}"
+             class="btn-outline inline-flex justify-center sm:justify-start focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+            <span class="flex items-center gap-2">
+              <i class="fas fa-folder-open text-sm" aria-hidden="true"></i>
+              See My Work
+            </span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{# ─── EDUCATION ────────────────────────────────────────────────────────────── #}
+<section class="py-16 sm:py-20 bg-slate-50 dark:bg-ink-800 relative overflow-hidden"
+         aria-labelledby="education-heading">
+  <div class="absolute inset-0 bg-kente opacity-20 pointer-events-none" aria-hidden="true"></div>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-10 sm:mb-14 reveal">
+      <p class="section-label justify-center">
+        <i class="fas fa-graduation-cap" aria-hidden="true"></i> Academic Foundation
+      </p>
+      <h2 id="education-heading"
+          class="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+        Where It All Started
+      </h2>
+    </div>
+
+    <div class="glass-card p-6 sm:p-8 md:p-10 reveal">
+      <div class="grid md:grid-cols-2 gap-8 items-start">
+
+        <div>
+          <div class="flex items-start gap-3 sm:gap-4 mb-5 sm:mb-6">
+            <div class="w-12 sm:w-14 h-12 sm:h-14 rounded-2xl flex items-center justify-center flex-shrink-0
+                        text-white font-display font-bold text-base sm:text-lg"
+                 style="background:linear-gradient(135deg,#4f46e5,#22d3ee);"
+                 aria-hidden="true">MU</div>
+            <div>
+              <h3 class="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white">
+                Makerere University
+              </h3>
+              <p class="text-brand font-semibold text-xs sm:text-sm">
+                School of Computing and Informatics Technology
+              </p>
+              <p class="text-xs text-slate-400 mt-0.5">
+                College of Computing and Information Sciences (CoCIS)
+              </p>
+            </div>
+          </div>
+
+          <div class="space-y-0 text-sm text-slate-600 dark:text-slate-400 divide-y divide-slate-200 dark:divide-white/6">
+            <div class="flex justify-between items-center py-2.5">
+              <span class="font-medium">Degree</span>
+              <span class="text-slate-800 dark:text-slate-300 text-right">BSc Software Engineering</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5">
+              <span class="font-medium">Duration</span>
+              <span class="text-slate-800 dark:text-slate-300">2022 – 2027</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5">
+              <span class="font-medium">Current Year</span>
+              <span class="text-slate-800 dark:text-slate-300">4th Year — 2025/2026</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5">
+              <span class="font-medium">Academic Status</span>
+              <span class="text-brand font-semibold">Final Year</span>
+            </div>
+            <div class="flex justify-between items-center py-2.5">
+              <span class="font-medium">Standing</span>
+              <span class="inline-flex items-center gap-1.5 text-jade font-semibold">
+                <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse inline-block"
+                      aria-hidden="true"></span>
+                Good Academic Standing
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs font-mono uppercase tracking-widest text-slate-400 mb-4">
+            Curriculum Domains
+          </p>
+          <div class="space-y-1.5">
+            {# Render DB-driven domains when available; fall back to the list passed from views.py #}
+            {% for domain in education_domains %}
+            <div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400
+                        p-2.5 rounded-xl hover:bg-brand/4 transition-colors">
+              <span class="w-6 h-6 rounded-md bg-brand/10 flex items-center justify-center flex-shrink-0"
+                    aria-hidden="true">
+                <i class="{{ domain.icon }} text-brand text-xs"></i>
+              </span>
+              {{ domain.name|escape }}
+            </div>
+            {% empty %}
+            {# default_domains is a plain list injected by the about view #}
+            {% for item in default_domains %}
+            <div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400
+                        p-2.5 rounded-xl hover:bg-brand/4 transition-colors">
+              <span class="w-2 h-2 rounded-full bg-brand flex-shrink-0" aria-hidden="true"></span>
+              {{ item|escape }}
+            </div>
+            {% endfor %}
+            {% endfor %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ─── THE WHY ──────────────────────────────────────────────────────────────── #}
+<section class="py-20 sm:py-24 relative overflow-hidden" aria-labelledby="why-heading">
+  <div class="absolute inset-0"
+       style="background:linear-gradient(160deg,#1a1330 0%,#0f1a2e 100%);"
+       aria-hidden="true"></div>
+  <div class="absolute inset-0 bg-kente opacity-10 pointer-events-none" aria-hidden="true"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 sm:w-[600px] h-64 sm:h-[400px]
+              rounded-full pointer-events-none"
+       style="background:radial-gradient(ellipse,rgba(245,158,11,0.07),transparent 70%);filter:blur(40px);"
+       aria-hidden="true"></div>
+
+  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="reveal">
+      <p class="section-label justify-center text-amber/80">
+        <span class="w-6 h-px bg-amber/60 inline-block" aria-hidden="true"></span>
+        The Why
+      </p>
+      <h2 id="why-heading"
+          class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-white mt-3 mb-6 sm:mb-8">
+        Why I Write Software
+      </h2>
+
+      <div class="kente-divider max-w-xs mx-auto mb-8 sm:mb-10 opacity-70" aria-hidden="true"></div>
+
+      <blockquote class="text-xl sm:text-2xl md:text-3xl font-display font-semibold
+                         text-white/90 leading-relaxed mb-8 sm:mb-10 italic">
+        <p>"The best software doesn't just run — it solves something real for someone who actually needs it."</p>
+      </blockquote>
+
+      <p class="text-base sm:text-lg text-white/60 leading-relaxed max-w-3xl mx-auto">
+        I got into software engineering because I believe in the compounding power of well-built systems.
+        A well-designed platform can serve thousands of users, automate bottlenecks that once took days,
+        and keep working reliably long after you've moved on. That conviction drives how I approach every
+        project — not just getting it to work, but getting it right: secure, scalable, maintainable,
+        and genuinely useful to the people who depend on it.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6 mt-12 sm:mt-16">
+      <div class="reveal delay-100 glass p-6 sm:p-7 rounded-2xl border border-white/8 text-center">
+        <i class="fas fa-server text-amber text-2xl sm:text-3xl mb-3 block" aria-hidden="true"></i>
+        <h3 class="font-bold text-white mb-2 text-sm sm:text-base">Production-Grade Systems</h3>
+        <p class="text-xs sm:text-sm text-white/50 leading-relaxed">
+          Every system I ship is built to handle real traffic, real edge cases, and real failure modes
+          — not just the happy path.
+        </p>
+      </div>
+      <div class="reveal delay-200 glass p-6 sm:p-7 rounded-2xl border border-white/8 text-center">
+        <i class="fas fa-users text-amber text-2xl sm:text-3xl mb-3 block" aria-hidden="true"></i>
+        <h3 class="font-bold text-white mb-2 text-sm sm:text-base">User-Centred</h3>
+        <p class="text-xs sm:text-sm text-white/50 leading-relaxed">
+          Technical excellence only matters if the end product is useful. I keep the actual user
+          — and their real workflow — at the centre of every decision.
+        </p>
+      </div>
+      <div class="reveal delay-300 glass p-6 sm:p-7 rounded-2xl border border-white/8 text-center">
+        <i class="fas fa-shield-halved text-amber text-2xl sm:text-3xl mb-3 block" aria-hidden="true"></i>
+        <h3 class="font-bold text-white mb-2 text-sm sm:text-base">Security by Default</h3>
+        <p class="text-xs sm:text-sm text-white/50 leading-relaxed">
+          Authentication, authorization, and input validation aren't afterthoughts in my work
+          — they're baked in from the first line of code.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# ─── TIMELINE / JOURNEY ───────────────────────────────────────────────────── #}
+<section class="py-20 sm:py-24 bg-slate-50 dark:bg-ink-800"
+         aria-labelledby="journey-heading">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12 sm:mb-16 reveal">
+      <p class="section-label justify-center">
+        <i class="fas fa-map-pin" aria-hidden="true"></i> My Story
+      </p>
+      <h2 id="journey-heading"
+          class="font-display text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+        The Journey
+      </h2>
+    </div>
+
+    <ol class="space-y-6 sm:space-y-8 list-none p-0">
+
+      {% for exp in experiences %}
+      <li class="timeline-item reveal delay-{{ forloop.counter }}00">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="glass-card p-5 sm:p-7 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                {{ exp.role|escape }}
+              </h3>
+              <p class="text-brand font-semibold text-xs sm:text-sm">{{ exp.company|escape }}</p>
+              {% if exp.location %}
+              <p class="text-xs text-slate-400 mt-0.5 flex items-center gap-1">
+                <i class="fas fa-location-dot" aria-hidden="true"></i>
+                {{ exp.location|escape }}
+              </p>
+              {% endif %}
+            </div>
+            <time class="font-mono text-xs bg-brand/8 text-brand px-3 py-1 rounded-full
+                         whitespace-nowrap self-start flex-shrink-0"
+                  datetime="{{ exp.start_date|date:'Y-m' }}/{% if exp.end_date %}{{ exp.end_date|date:'Y-m' }}{% endif %}">
+              {{ exp.start_date|date:"M Y" }} —
+              {% if exp.end_date %}{{ exp.end_date|date:"M Y" }}{% else %}Present{% endif %}
+            </time>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+            {{ exp.description|escape }}
+          </p>
+        </div>
+      </li>
+
+      {% empty %}
+
+      {# Fallback static timeline when no DB records exist #}
+      <li class="timeline-item reveal delay-100">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="glass-card p-5 sm:p-7 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                Software Engineering Intern
+              </h3>
+              <p class="text-brand font-semibold text-xs sm:text-sm">
+                National Social Security Fund (NSSF Uganda) ·
+                <a href="https://www.nssfug.org"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="hover:underline focus:outline-none focus-visible:ring-1 focus-visible:ring-brand rounded">
+                  nssfug.org
+                </a>
+              </p>
+            </div>
+            <span class="font-mono text-xs bg-brand/8 text-brand px-3 py-1 rounded-full
+                         whitespace-nowrap self-start flex-shrink-0">
+              Jun 2025 — Aug 2025
+            </span>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Three-month attachment at one of East Africa's largest social security institutions.
+            Contributed to enterprise-scale Django, Laravel, and Java systems serving over 4 million users.
+            Worked with PostgreSQL, Firebase, Docker, and CI/CD pipelines within agile sprint workflows.
+            Awarded a Distinction grade.
+          </p>
+        </div>
+      </li>
+
+      <li class="timeline-item reveal delay-200">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="glass-card p-5 sm:p-7 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                BSc Software Engineering — 4th Year
+              </h3>
+              <p class="text-brand font-semibold text-xs sm:text-sm">
+                Makerere University, School of Computing (SCIT)
+              </p>
+            </div>
+            <span class="font-mono text-xs bg-brand/8 text-brand px-3 py-1 rounded-full
+                         whitespace-nowrap self-start flex-shrink-0">
+              2022 — Present
+            </span>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Four-year accredited degree programme covering software engineering practice, AI/ML, systems
+            architecture, security, web and mobile development, and professional engineering ethics.
+            Currently in good academic standing entering the final year.
+          </p>
+        </div>
+      </li>
+
+      <li class="timeline-item reveal delay-300">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="glass-card p-5 sm:p-7 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                Uganda Advanced Certificate of Education (UACE)
+              </h3>
+              <p class="text-brand font-semibold text-xs sm:text-sm">
+                Bukedea Lifeline Secondary School
+              </p>
+            </div>
+            <span class="font-mono text-xs bg-brand/8 text-brand px-3 py-1 rounded-full
+                         whitespace-nowrap self-start flex-shrink-0">
+              2020
+            </span>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Completed A-Level studies offering BCM/ICT, attaining the Uganda Advanced Certificate
+            of Education.
+          </p>
+        </div>
+      </li>
+
+      <li class="timeline-item reveal delay-400">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="glass-card p-5 sm:p-7 ml-2">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
+            <div>
+              <h3 class="font-display font-bold text-base sm:text-lg text-slate-900 dark:text-white">
+                Uganda Certificate of Education (UCE)
+              </h3>
+              <p class="text-brand font-semibold text-xs sm:text-sm">
+                Bukedea Lifeline Secondary School
+              </p>
+            </div>
+            <span class="font-mono text-xs bg-brand/8 text-brand px-3 py-1 rounded-full
+                         whitespace-nowrap self-start flex-shrink-0">
+              2018
+            </span>
+          </div>
+          <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm leading-relaxed">
+            Completed O-Level studies, attaining the Uganda Certificate of Education.
+          </p>
+        </div>
+      </li>
+
+      {% endfor %}
+
+    </ol>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,665 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact — Akol Paul{% endblock %}
+{% block meta_description %}Get in touch with Akol Paul — Software Engineer open to freelance projects, full-time roles, and impactful collaborations worldwide.{% endblock %}
+{% block og_title %}Contact — Akol Paul{% endblock %}
+{% block og_description %}Reach out to Akol Paul for project collaborations, freelance work, or just to say hello.{% endblock %}
+{% block canonical %}https://akolpaul.dev/contact/{% endblock %}
+
+{% block content %}
+
+<section class="relative hero-bg overflow-hidden pt-32 pb-20" aria-labelledby="contact-hero-heading">
+  <canvas id="particles-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
+
+  <div class="pointer-events-none absolute -top-40 -left-40 w-96 h-96 rounded-full opacity-20 blur-3xl"
+       style="background: radial-gradient(circle, #4f46e5, transparent 70%);" aria-hidden="true"></div>
+  <div class="pointer-events-none absolute -bottom-20 -right-20 w-80 h-80 rounded-full opacity-15 blur-3xl"
+       style="background: radial-gradient(circle, #22d3ee, transparent 70%);" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 text-center">
+    <p class="section-label reveal justify-center">
+      <span class="fas fa-paper-plane" aria-hidden="true"></span>
+      Get In Touch
+    </p>
+    <h1 id="contact-hero-heading" class="font-display text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mt-2 mb-5 reveal delay-100">
+      Let's <span class="hero-name">Build</span> Something<br class="hidden sm:block"> Together
+    </h1>
+    <p class="text-base md:text-lg text-slate-500 dark:text-slate-400 leading-relaxed max-w-xl mx-auto reveal delay-200">
+      Whether it's a new product, a tricky engineering problem, or an open-source collaboration — I'd love to hear from you.
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-3 mt-8 reveal delay-300">
+      <a href="mailto:paulakol97@gmail.com"
+         class="inline-flex items-center gap-2 glass px-4 py-2.5 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+        <span class="fas fa-envelope text-brand text-xs" aria-hidden="true"></span>
+        paulakol97@gmail.com
+      </a>
+      <a href="tel:+256782457648"
+         class="inline-flex items-center gap-2 glass px-4 py-2.5 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300 hover:text-brand transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+        <span class="fas fa-phone text-brand text-xs" aria-hidden="true"></span>
+        +256 782 457 648
+      </a>
+      <span class="inline-flex items-center gap-2 glass px-4 py-2.5 rounded-full text-sm font-medium text-slate-700 dark:text-slate-300">
+        <span class="fas fa-globe text-jade text-xs" aria-hidden="true"></span>
+        Available Worldwide
+      </span>
+    </div>
+  </div>
+</section>
+
+<div class="mx-4 sm:mx-6 md:mx-auto md:max-w-4xl my-0 h-px rounded-full"
+     style="background: linear-gradient(90deg, transparent, rgba(79,70,229,0.3), rgba(34,211,238,0.3), transparent);"
+     aria-hidden="true"></div>
+
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-16 md:py-20">
+  <div class="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start">
+
+    <!-- ── Sidebar ── -->
+    <aside class="lg:col-span-2 space-y-5" aria-label="Contact information">
+
+      <!-- Availability badge -->
+      <div class="glass-card p-5 sm:p-6 reveal reveal-left">
+        <div class="flex items-center gap-3 mb-3">
+          <span class="w-2.5 h-2.5 rounded-full bg-jade animate-pulse flex-shrink-0" aria-hidden="true"></span>
+          <span class="text-sm font-semibold text-jade">Available for opportunities</span>
+        </div>
+        <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+          Open to full-time roles, freelance contracts, and impactful collaborations — anywhere in the world.
+        </p>
+      </div>
+
+      <!-- Contact channels -->
+      <div class="glass-card p-5 sm:p-6 reveal reveal-left delay-100">
+        <h2 class="font-display font-bold text-base mb-4 text-slate-800 dark:text-slate-100">Contact Channels</h2>
+        <ul class="space-y-4 list-none p-0 m-0">
+          <li>
+            <a href="mailto:paulakol97@gmail.com"
+               class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-lg">
+              <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-brand"
+                    style="background: rgba(79,70,229,0.1);" aria-hidden="true">
+                <span class="fas fa-envelope text-sm"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-xs text-slate-400 mb-0.5">Email</p>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-brand transition-colors truncate">
+                  paulakol97@gmail.com
+                </p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a href="tel:+256782457648"
+               class="flex items-center gap-3 group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-lg">
+              <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-cyan-500"
+                    style="background: rgba(34,211,238,0.1);" aria-hidden="true">
+                <span class="fas fa-phone text-sm"></span>
+              </span>
+              <div class="min-w-0">
+                <p class="text-xs text-slate-400 mb-0.5">Phone / WhatsApp</p>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300 group-hover:text-brand transition-colors">
+                  +256 782 457 648
+                </p>
+              </div>
+            </a>
+          </li>
+          <li>
+            <div class="flex items-center gap-3">
+              <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-amber-500"
+                    style="background: rgba(245,158,11,0.1);" aria-hidden="true">
+                <span class="fas fa-globe text-sm"></span>
+              </span>
+              <div>
+                <p class="text-xs text-slate-400 mb-0.5">Location</p>
+                <p class="text-sm font-medium text-slate-700 dark:text-slate-300">Remote-friendly</p>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Social links -->
+      <div class="glass-card p-5 sm:p-6 reveal reveal-left delay-200">
+        <h2 class="font-display font-bold text-base mb-4 text-slate-800 dark:text-slate-100">Find Me Online</h2>
+        <div class="flex gap-3">
+          <a href="https://github.com/akolpaul2244" target="_blank" rel="noopener noreferrer"
+             class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+             aria-label="GitHub profile">
+            <span class="fab fa-github text-lg" aria-hidden="true"></span>
+          </a>
+          <a href="https://www.linkedin.com/in/akol-paul-6b662a312/" target="_blank" rel="noopener noreferrer"
+             class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+             aria-label="LinkedIn profile">
+            <span class="fab fa-linkedin-in text-lg" aria-hidden="true"></span>
+          </a>
+          <a href="https://mail.google.com/mail/?view=cm&to=paulakol97@gmail.com"
+             target="_blank" rel="noopener noreferrer"
+             class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl"
+             aria-label="Send email via Gmail">
+            <span class="fas fa-envelope text-lg" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Response time -->
+      <div class="glass-card p-5 reveal reveal-left delay-300">
+        <div class="flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-jade"
+                style="background: rgba(16,185,129,0.1);" aria-hidden="true">
+            <span class="fas fa-clock text-sm"></span>
+          </span>
+          <div>
+            <p class="text-xs text-slate-400">Typical response</p>
+            <p class="text-sm font-semibold text-slate-700 dark:text-slate-300">Within 24 hours</p>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── Contact form ── -->
+    <div class="lg:col-span-3">
+
+      <!-- Success alert -->
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+        <div role="alert"
+             class="flex items-start gap-4 mb-8 p-5 rounded-2xl border reveal"
+             style="background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.25);">
+          <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-jade"
+                style="background: rgba(16,185,129,0.15);" aria-hidden="true">
+            <span class="fas fa-circle-check"></span>
+          </span>
+          <div>
+            <p class="font-semibold text-jade">Message sent successfully!</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">
+              Thanks for reaching out — I'll reply within 24 hours.
+            </p>
+          </div>
+        </div>
+        {% endif %}
+      {% endfor %}
+
+      <!-- Error alert -->
+      {% if form.errors %}
+      <div role="alert"
+           class="flex items-start gap-4 mb-8 p-5 rounded-2xl border reveal"
+           style="background: rgba(239,68,68,0.08); border-color: rgba(239,68,68,0.25);">
+        <span class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 text-red-500"
+              style="background: rgba(239,68,68,0.15);" aria-hidden="true">
+          <span class="fas fa-circle-exclamation"></span>
+        </span>
+        <div>
+          <p class="font-semibold text-red-500">Please fix the errors below</p>
+          <p class="text-sm text-slate-500 dark:text-slate-400 mt-0.5">Check the highlighted fields and try again.</p>
+        </div>
+      </div>
+      {% endif %}
+
+      <div class="glass-card p-6 sm:p-8 md:p-10 reveal reveal-right">
+        <div class="mb-7">
+          <p class="section-label">
+            <span class="fas fa-pen-to-square" aria-hidden="true"></span>
+            Send a Message
+          </p>
+          <h2 class="font-display text-2xl font-bold text-slate-800 dark:text-slate-100 mt-1">
+            Start a Conversation
+          </h2>
+        </div>
+
+        <form method="POST" action="" novalidate id="contact-form"
+              autocomplete="on" class="space-y-6">
+          {% csrf_token %}
+
+          {# Honeypot — hidden from real users, trips bots #}
+          <div class="hidden" aria-hidden="true">
+            <label for="id_website">Website</label>
+            <input type="text" name="website" id="id_website"
+                   tabindex="-1" autocomplete="off" value=""
+                   style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+            <!-- Name -->
+            <div class="form-group space-y-1.5">
+              <label for="{{ form.name.id_for_label }}"
+                     class="block text-sm font-medium text-slate-600 dark:text-slate-400">
+                Full Name <span class="text-brand" aria-hidden="true">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" aria-hidden="true">
+                  <span class="fas fa-user text-xs"></span>
+                </span>
+                <input type="text"
+                       id="{{ form.name.id_for_label }}"
+                       name="{{ form.name.html_name }}"
+                       autocomplete="name"
+                       placeholder="Jane Smith"
+                       value="{{ form.name.value|default:'' }}"
+                       maxlength="100"
+                       data-min="2"
+                       data-max="100"
+                       data-label="Full name"
+                       data-hint="Your full name"
+                       class="form-field pl-10{% if form.name.errors %} border-red-400{% endif %}"
+                       aria-required="true"
+                       aria-describedby="{{ form.name.id_for_label }}-msg">
+              </div>
+              <p id="{{ form.name.id_for_label }}-msg" class="text-xs min-h-[1.25rem]" role="alert" aria-live="polite">
+                {% if form.name.errors %}
+                  <span class="text-red-400">{{ form.name.errors|first }}</span>
+                {% else %}
+                  <span class="text-slate-400">Your full name</span>
+                {% endif %}
+              </p>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group space-y-1.5">
+              <label for="{{ form.email.id_for_label }}"
+                     class="block text-sm font-medium text-slate-600 dark:text-slate-400">
+                Email Address <span class="text-brand" aria-hidden="true">*</span>
+              </label>
+              <div class="relative">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" aria-hidden="true">
+                  <span class="fas fa-at text-xs"></span>
+                </span>
+                <input type="email"
+                       id="{{ form.email.id_for_label }}"
+                       name="{{ form.email.html_name }}"
+                       autocomplete="email"
+                       placeholder="you@example.com"
+                       value="{{ form.email.value|default:'' }}"
+                       maxlength="254"
+                       data-max="254"
+                       data-label="Email address"
+                       data-hint="I'll reply to this address"
+                       class="form-field pl-10{% if form.email.errors %} border-red-400{% endif %}"
+                       aria-required="true"
+                       aria-describedby="{{ form.email.id_for_label }}-msg">
+              </div>
+              <p id="{{ form.email.id_for_label }}-msg" class="text-xs min-h-[1.25rem]" role="alert" aria-live="polite">
+                {% if form.email.errors %}
+                  <span class="text-red-400">{{ form.email.errors|first }}</span>
+                {% else %}
+                  <span class="text-slate-400">I'll reply to this address</span>
+                {% endif %}
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Subject -->
+          <div class="form-group space-y-1.5">
+            <label for="{{ form.subject.id_for_label }}"
+                   class="block text-sm font-medium text-slate-600 dark:text-slate-400">
+              Subject <span class="text-brand" aria-hidden="true">*</span>
+            </label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" aria-hidden="true">
+                <span class="fas fa-tag text-xs"></span>
+              </span>
+              <input type="text"
+                     id="{{ form.subject.id_for_label }}"
+                     name="{{ form.subject.html_name }}"
+                     placeholder="Project Collaboration / Job Opportunity / …"
+                     value="{{ form.subject.value|default:'' }}"
+                     maxlength="200"
+                     data-min="3"
+                     data-max="200"
+                     data-label="Subject"
+                     data-hint=""
+                     class="form-field pl-10{% if form.subject.errors %} border-red-400{% endif %}"
+                     aria-required="true"
+                     aria-describedby="{{ form.subject.id_for_label }}-msg">
+            </div>
+            <p id="{{ form.subject.id_for_label }}-msg" class="text-xs min-h-[1.25rem]" role="alert" aria-live="polite">
+              {% if form.subject.errors %}
+                <span class="text-red-400">{{ form.subject.errors|first }}</span>
+              {% else %}
+                <span class="text-slate-400">&nbsp;</span>
+              {% endif %}
+            </p>
+          </div>
+
+          <!-- Inquiry type -->
+          {% if form.inquiry_type %}
+          <div class="form-group space-y-1.5">
+            <label for="{{ form.inquiry_type.id_for_label }}"
+                   class="block text-sm font-medium text-slate-600 dark:text-slate-400">
+              Type of Inquiry
+            </label>
+            <div class="relative">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" aria-hidden="true">
+                <span class="fas fa-list-ul text-xs"></span>
+              </span>
+              <select id="{{ form.inquiry_type.id_for_label }}"
+                      name="{{ form.inquiry_type.html_name }}"
+                      class="form-field pl-10 appearance-none cursor-pointer">
+                <option value="">Select an option…</option>
+                <option value="job"        {% if form.inquiry_type.value == 'job' %}selected{% endif %}>Full-time / Part-time Role</option>
+                <option value="freelance"  {% if form.inquiry_type.value == 'freelance' %}selected{% endif %}>Freelance / Contract</option>
+                <option value="collab"     {% if form.inquiry_type.value == 'collab' %}selected{% endif %}>Open-source Collaboration</option>
+                <option value="consulting" {% if form.inquiry_type.value == 'consulting' %}selected{% endif %}>Technical Consulting</option>
+                <option value="other"      {% if form.inquiry_type.value == 'other' %}selected{% endif %}>Other</option>
+              </select>
+              <span class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" aria-hidden="true">
+                <span class="fas fa-chevron-down text-xs"></span>
+              </span>
+            </div>
+          </div>
+          {% endif %}
+
+          <!-- Message -->
+          <div class="form-group space-y-1.5">
+            <label for="{{ form.message.id_for_label }}"
+                   class="block text-sm font-medium text-slate-600 dark:text-slate-400">
+              Message <span class="text-brand" aria-hidden="true">*</span>
+            </label>
+            <textarea id="{{ form.message.id_for_label }}"
+                      name="{{ form.message.html_name }}"
+                      rows="6"
+                      placeholder="Tell me about your project, timeline, and how I can help…"
+                      maxlength="5000"
+                      data-min="20"
+                      data-max="5000"
+                      data-label="Message"
+                      data-hint="Minimum 20 characters"
+                      class="form-field resize-none{% if form.message.errors %} border-red-400{% endif %}"
+                      aria-required="true"
+                      aria-describedby="{{ form.message.id_for_label }}-msg">{{ form.message.value|default:'' }}</textarea>
+
+            <div class="relative h-1 rounded-full overflow-hidden bg-slate-200 dark:bg-slate-700 mt-2" aria-hidden="true">
+              <div id="char-bar"
+                   class="absolute left-0 top-0 h-full rounded-full transition-all duration-150"
+                   style="width: 0%; background: #ef4444;"></div>
+            </div>
+
+            <div class="flex justify-between items-start gap-2 mt-1">
+              <p id="{{ form.message.id_for_label }}-msg" class="text-xs min-h-[1.25rem]" role="alert" aria-live="polite">
+                {% if form.message.errors %}
+                  <span class="text-red-400">{{ form.message.errors|first }}</span>
+                {% else %}
+                  <span class="text-slate-400">Minimum 20 characters</span>
+                {% endif %}
+              </p>
+              <p id="char-counter" class="text-xs text-slate-400 flex-shrink-0 tabular-nums whitespace-nowrap" aria-live="polite">
+                <span id="char-count">0</span> / 5000
+              </p>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn"
+                  class="btn-primary w-full justify-center text-base py-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+                  aria-live="polite">
+            <span id="submit-label" class="flex items-center gap-2.5 justify-center">
+              <span class="fas fa-paper-plane text-sm" aria-hidden="true"></span>
+              Send Message
+            </span>
+          </button>
+
+          <p class="text-center text-xs text-slate-400 mt-3">
+            <span class="fas fa-shield-halved mr-1 text-jade" aria-hidden="true"></span>
+            Your information is kept private and never shared with third parties.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+(function () {
+  'use strict';
+
+  /* ── Constants ── */
+  var EMAIL_RE = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  var MSG_MIN  = 20;
+  var MSG_MAX  = 5000;
+  var SUBMIT_ONCE = false; /* prevent double-submit */
+
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+
+  var msgArea  = document.getElementById('{{ form.message.id_for_label }}');
+  var charDisp = document.getElementById('char-count');
+  var charBar  = document.getElementById('char-bar');
+  var charWrap = document.getElementById('char-counter');
+
+  /* ── Helpers ── */
+  function getMsgEl(field) {
+    return document.getElementById(field.id + '-msg');
+  }
+
+  function setError(field, text) {
+    field.classList.add('border-red-400');
+    field.classList.remove('border-jade');
+    field.setAttribute('aria-invalid', 'true');
+    var p = getMsgEl(field);
+    if (p) p.innerHTML = '<span class="text-red-400">' + escHtml(text) + '</span>';
+  }
+
+  function setSuccess(field) {
+    field.classList.remove('border-red-400');
+    field.classList.add('border-jade');
+    field.setAttribute('aria-invalid', 'false');
+    var p = getMsgEl(field);
+    if (p) {
+      var hint = field.dataset.hint || '';
+      p.innerHTML = '<span class="text-slate-400">' + escHtml(hint) + '</span>';
+    }
+  }
+
+  function clearState(field) {
+    field.classList.remove('border-red-400', 'border-jade');
+    field.removeAttribute('aria-invalid');
+    var p = getMsgEl(field);
+    if (p) {
+      var hint = field.dataset.hint || '';
+      p.innerHTML = '<span class="text-slate-400">' + (hint ? escHtml(hint) : '&nbsp;') + '</span>';
+    }
+  }
+
+  /* Minimal HTML-escape to prevent XSS in error messages */
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#x27;');
+  }
+
+  /* ── Character counter ── */
+  function updateCharCount() {
+    if (!msgArea || !charDisp) return;
+
+    var len       = msgArea.value.length;
+    var remaining = MSG_MIN - len;
+
+    charDisp.textContent = len;
+
+    var barPct   = Math.min((len / MSG_MAX) * 100, 100);
+    var barColor =
+      len > 4900     ? '#ef4444' :
+      len > 4500     ? '#f59e0b' :
+      len >= MSG_MIN ? '#10b981' :
+                       '#ef4444';
+
+    if (charBar) {
+      charBar.style.width      = barPct + '%';
+      charBar.style.background = barColor;
+    }
+
+    if (charWrap) {
+      charWrap.className =
+        len > 4900 ? 'text-xs flex-shrink-0 tabular-nums whitespace-nowrap text-red-500'   :
+        len > 4500 ? 'text-xs flex-shrink-0 tabular-nums whitespace-nowrap text-amber-500' :
+                     'text-xs flex-shrink-0 tabular-nums whitespace-nowrap text-slate-400';
+    }
+
+    var msgEl = getMsgEl(msgArea);
+    if (!msgEl) return;
+
+    if (msgArea.dataset.touched) {
+      if (len === 0) {
+        setError(msgArea, 'Message is required.');
+      } else if (len < MSG_MIN) {
+        setError(msgArea, remaining + ' more character' + (remaining === 1 ? '' : 's') + ' needed.');
+      } else if (len > MSG_MAX) {
+        setError(msgArea, 'Message must be under ' + MSG_MAX + ' characters.');
+      } else {
+        setSuccess(msgArea);
+      }
+    } else {
+      if (len === 0) {
+        msgEl.innerHTML = '<span class="text-slate-400">Minimum 20 characters</span>';
+      } else if (len < MSG_MIN) {
+        msgEl.innerHTML = '<span class="text-amber-500">' + remaining + ' more character' + (remaining === 1 ? '' : 's') + ' to go</span>';
+      } else {
+        msgEl.innerHTML = '<span class="text-slate-400">Minimum 20 characters</span>';
+      }
+    }
+  }
+
+  /* ── Field validation ── */
+  function validateField(field) {
+    var val   = field.value.trim();
+    var label = field.dataset.label || 'This field';
+    var min   = parseInt(field.dataset.min, 10) || 0;
+    var max   = parseInt(field.dataset.max, 10) || Infinity;
+
+    if (!val) {
+      setError(field, label + ' is required.');
+      return false;
+    }
+    if (val.length < min) {
+      var rem = min - val.length;
+      setError(field, rem + ' more character' + (rem === 1 ? '' : 's') + ' needed.');
+      return false;
+    }
+    if (val.length > max) {
+      setError(field, label + ' must be under ' + max + ' characters.');
+      return false;
+    }
+    if (field.type === 'email' && !EMAIL_RE.test(val)) {
+      setError(field, 'Enter a valid email address.');
+      return false;
+    }
+    setSuccess(field);
+    return true;
+  }
+
+  function validateMessage() {
+    var len = msgArea ? msgArea.value.trim().length : 0;
+    return len >= MSG_MIN && len <= MSG_MAX;
+  }
+
+  /* ── Attach listeners ── */
+  var requiredFields = Array.prototype.slice.call(
+    form.querySelectorAll('input[data-label], textarea[data-label]')
+  );
+
+  requiredFields.forEach(function (field) {
+    if (field === msgArea) {
+      field.addEventListener('input', updateCharCount);
+      field.addEventListener('blur', function () {
+        field.dataset.touched = '1';
+        updateCharCount();
+      });
+      updateCharCount();
+      return;
+    }
+
+    field.addEventListener('blur', function () {
+      if (field.value.trim() || field.dataset.touched) {
+        field.dataset.touched = '1';
+        validateField(field);
+      }
+    });
+
+    field.addEventListener('input', function () {
+      if (field.dataset.touched) {
+        if (field.value.trim()) {
+          validateField(field);
+        } else {
+          clearState(field);
+        }
+      }
+    });
+  });
+
+  /* ── Submit handler ── */
+  form.addEventListener('submit', function (e) {
+    /* Honeypot check */
+    var honeypot = form.querySelector('[name="website"]');
+    if (honeypot && honeypot.value.trim()) {
+      e.preventDefault();
+      return;
+    }
+
+    /* Double-submit guard */
+    if (SUBMIT_ONCE) {
+      e.preventDefault();
+      return;
+    }
+
+    var allValid = true;
+
+    requiredFields.forEach(function (field) {
+      field.dataset.touched = '1';
+      if (field === msgArea) {
+        updateCharCount();
+        if (!validateMessage()) allValid = false;
+      } else {
+        if (!validateField(field)) allValid = false;
+      }
+    });
+
+    if (!allValid) {
+      e.preventDefault();
+      var firstErr = form.querySelector('.border-red-400');
+      if (firstErr) {
+        firstErr.focus();
+        firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+      return;
+    }
+
+    /* Mark submitted & update UI */
+    SUBMIT_ONCE = true;
+    var btn   = document.getElementById('submit-btn');
+    var label = document.getElementById('submit-label');
+    if (btn && label) {
+      btn.disabled = true;
+      btn.setAttribute('aria-disabled', 'true');
+      btn.classList.add('opacity-75', 'cursor-not-allowed');
+      label.innerHTML =
+        '<span class="fas fa-circle-notch fa-spin text-sm" aria-hidden="true"></span>' +
+        ' <span>Sending\u2026</span>';
+    }
+  });
+
+  /* ── Restore button if browser back-navigation lands here with the form intact ── */
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) {
+      SUBMIT_ONCE = false;
+      var btn   = document.getElementById('submit-btn');
+      var label = document.getElementById('submit-label');
+      if (btn && label) {
+        btn.disabled = false;
+        btn.removeAttribute('aria-disabled');
+        btn.classList.remove('opacity-75', 'cursor-not-allowed');
+        label.innerHTML =
+          '<span class="fas fa-paper-plane text-sm" aria-hidden="true"></span> Send Message';
+      }
+    }
+  });
+
+}());
+</script>
+{% endblock %}
