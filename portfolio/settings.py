@@ -8,12 +8,23 @@ import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#  Security 
-SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-me-in-production')
+
+# ============================================================
+# SECURITY
+# ============================================================
+
+SECRET_KEY = config('SECRET_KEY')  # No default — must be set in environment
 DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
 
-#  Applications 
+# Prevent host header poisoning
+ALLOWED_HOSTS += []  # Railway injects the domain automatically via ALLOWED_HOSTS env var
+
+
+# ============================================================
+# APPLICATIONS
+# ============================================================
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -25,16 +36,21 @@ INSTALLED_APPS = [
     'core',
 ]
 
+
+# ============================================================
+# MIDDLEWARE
+# ============================================================
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',          # Static files in prod
+    'whitenoise.middleware.WhiteNoiseMiddleware',           # Static files in prod
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'csp.middleware.CSPMiddleware',                        # Content Security Policy
+    'csp.middleware.CSPMiddleware',                         # Content Security Policy
 ]
 
 ROOT_URLCONF = 'portfolio.urls'
@@ -57,12 +73,21 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-#  Database 
-# SQLite for dev, PostgreSQL for production (set DATABASE_URL env var)
+
+# ============================================================
+# DATABASE
+# ============================================================
+
 DATABASE_URL = config('DATABASE_URL', default='')
 if DATABASE_URL:
     import dj_database_url
-    DATABASES = {'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600)}
+    DATABASES = {
+        'default': dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=not DEBUG,  # Enforce SSL in production
+        )
+    }
 else:
     DATABASES = {
         'default': {
@@ -71,7 +96,11 @@ else:
         }
     }
 
-#  Password Validation 
+
+# ============================================================
+# PASSWORD VALIDATION
+# ============================================================
+
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -79,13 +108,21 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
-#  Localisation 
+
+# ============================================================
+# LOCALISATION
+# ============================================================
+
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Kampala'
 USE_I18N = True
 USE_TZ = True
 
-#  Static & Media Files 
+
+# ============================================================
+# STATIC & MEDIA FILES
+# ============================================================
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
@@ -96,30 +133,58 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#  Security Headers 
-if not DEBUG:
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
 
+# ============================================================
+# SECURITY HEADERS
+# ============================================================
+
+# Always-on headers (dev + prod)
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
 REFERRER_POLICY = 'strict-origin-when-cross-origin'
 
-#  Content Security Policy (django-csp) 
+# Production-only headers
+if not DEBUG:
+    SECURE_HSTS_SECONDS = 31536000          # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Required for Railway
+
+# Session hardening
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1800  # 30 minutes
+
+# CSRF hardening
+CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_SAMESITE = 'Lax'
+CSRF_TRUSTED_ORIGINS = config(
+    'CSRF_TRUSTED_ORIGINS',
+    default='http://localhost,http://127.0.0.1',
+    cast=Csv()
+)
+
+
+# ============================================================
+# CONTENT SECURITY POLICY (django-csp)
+# ============================================================
+
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = (
-    "'self'", "'unsafe-inline'",
+    "'self'",
+    "'unsafe-inline'",
     "https://cdn.tailwindcss.com",
     "https://cdnjs.cloudflare.com",
     "https://fonts.googleapis.com",
 )
 CSP_SCRIPT_SRC = (
-    "'self'", "'unsafe-inline'",
+    "'self'",
+    "'unsafe-inline'",
     "https://cdn.tailwindcss.com",
     "https://cdnjs.cloudflare.com",
 )
@@ -129,9 +194,16 @@ CSP_FONT_SRC = (
     "https://cdnjs.cloudflare.com",
 )
 CSP_IMG_SRC = ("'self'", "data:", "https:")
-CSP_CONNECT_SRC = ("'self'",)
+CSP_CONNECT_SRC = ("'self'", "https://api.github.com")  # GitHub activity chart
+CSP_FRAME_ANCESTORS = ("'none'",)                        # Equivalent to X-Frame-Options: DENY
+CSP_BASE_URI = ("'self'",)                               # Prevent base tag hijacking
+CSP_FORM_ACTION = ("'self'",)                            # Forms can only submit to same origin
 
-#  Email (Contact Form) 
+
+# ============================================================
+# EMAIL (CONTACT FORM)
+# ============================================================
+
 EMAIL_BACKEND = config(
     'EMAIL_BACKEND',
     default='django.core.mail.backends.console.EmailBackend'
@@ -139,30 +211,59 @@ EMAIL_BACKEND = config(
 EMAIL_HOST = config('EMAIL_HOST', default='smtp.gmail.com')
 EMAIL_PORT = config('EMAIL_PORT', default=587, cast=int)
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
-EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='paulakol97@gmail.com')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
-DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='paulakol97@gmail.com')
-CONTACT_EMAIL = config('CONTACT_EMAIL', default='paulakol97@gmail.com')
-SERVER_EMAIL = config('EMAIL_HOST_USER', default='paulakol97@gmail.com')
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default='')
+CONTACT_EMAIL = config('CONTACT_EMAIL', default='')
+SERVER_EMAIL = config('EMAIL_HOST_USER', default='')
 
-#  Cache (for rate limiting) 
+
+# ============================================================
+# CACHE (FOR RATE LIMITING)
+# ============================================================
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
 
-#  Logging 
+
+# ============================================================
+# LOGGING
+# ============================================================
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '[{levelname}] {asctime} {module} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
-        'console': {'class': 'logging.StreamHandler'},
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
     },
     'root': {
         'handlers': ['console'],
         'level': 'WARNING',
     },
+    'loggers': {
+        'django.security': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
 }
+
+
+# ============================================================
+# THIRD-PARTY API KEYS
+# ============================================================
 
 GROQ_API_KEY = config('GROQ_API_KEY', default='')
