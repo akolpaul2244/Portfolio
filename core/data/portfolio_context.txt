@@ -1,0 +1,491 @@
+# ============================================================
+# AKOL PAUL — PORTFOLIO KNOWLEDGE BASE / CHATBOT DATASET
+# Version: 3.0 | Last Updated: June 2026
+# Purpose: Powers the AI chatbot on Akol Paul's portfolio
+#          website. Contains full professional, academic, and
+#          personal context for answering recruiter/client
+#          questions accurately.
+# ============================================================
+
+
+# ============================================================
+# SECTION 1: PERSONAL IDENTITY
+# ============================================================
+
+Full Name:         Akol Paul
+Preferred Name:    Paul
+Role / Title:      Software Engineer
+Location:          Kampala, Uganda
+Languages Spoken:  English (Fluent), Ateso (Fluent), Luganda (Basic)
+
+Contact:
+  Email:     paulakol97@gmail.com
+  Phone:     +256 782 457 648
+  LinkedIn:  https://www.linkedin.com/in/akol-paul-6b662a312/
+  GitHub:    https://github.com/akolpaul2244
+
+Availability:       Open to full-time, contract, and remote roles globally.
+Work Authorization: Eligible to work in Uganda and remotely for international clients.
+
+
+# ============================================================
+# SECTION 2: PROFESSIONAL SUMMARY
+# ============================================================
+
+Akol Paul is a Software Engineer with production experience delivering secure, scalable systems
+across fintech, real-time data platforms, humanitarian technology, and AI/NLP.
+
+He is a full-stack developer proficient in Django, Laravel, React, and React Native, with deep
+expertise in RESTful and GraphQL APIs, microservices architecture, and cloud-native deployments
+using Docker, CI/CD pipelines, PostgreSQL, and Firebase.
+
+He gained enterprise-scale experience during a formal internship at one of the largest public
+financial institutions in his country, where he contributed to mission-critical software systems
+serving millions of users.
+
+His engineering philosophy: the best engineers ship — not just code, but working, secure,
+maintainable systems that solve real problems for real users.
+
+Core strengths:
+  - Backend engineering depth (Django, Laravel, Flask, Node.js)
+  - Frontend fluency (React, React Native, HTMX, Alpine.js)
+  - Security awareness (OWASP-aligned practices across all projects)
+  - Deployment experience (Docker, Railway, Vercel, Google Cloud)
+  - Research-grade AI/ML skills (HuggingFace, Whisper, fastText)
+
+
+# ============================================================
+# SECTION 3: EDUCATION
+# ============================================================
+
+--- Current Degree ---
+Institution:  Makerere University, Kampala, Uganda
+Degree:       Bachelor of Science in Software Engineering (BSSE)
+Faculty:      School of Computing and Informatics Technology (SCIT)
+Duration:     2022 – 2026 (4-year programme; graduation January 2027)
+Current Year: 4th Year (2025/2026 academic year)
+Status:       Final-year student
+
+About the Programme:
+The Bachelor of Science in Software Engineering is a rigorous 4-year undergraduate degree
+covering both theoretical foundations and industry-ready skills for designing, developing,
+testing, deploying, and maintaining complex software systems.
+
+Curriculum domains:
+  1. Mathematics & Logic — algorithm design, formal methods, computational modelling
+  2. Programming & OOP — structured and object-oriented paradigms across multiple languages
+  3. Systems & Architecture — OS internals, distributed systems, computer networks, IoT
+  4. Web & Mobile Development — full-spectrum application development
+  5. Data & AI — data modelling, AI/ML, cloud computing
+  6. Engineering Practice — software metrics, testing, requirements engineering, QA
+  7. Professional Development — research methodology, entrepreneurship, communication
+  8. Practical Projects — mini projects (Years 1–3), industry internship (Year 3), capstone (Year 4)
+
+Career Outcomes:
+Graduates are prepared for careers in full-stack development, systems engineering, software
+architecture, cybersecurity, AI/ML engineering, cloud computing, and tech entrepreneurship.
+
+--- Secondary Education ---
+Institution:  Bukedea Lifeline Secondary School, Uganda
+Certificates: Advanced Certificate of Education (2020) and Certificate of Education (2018)
+
+
+# ============================================================
+# SECTION 4: PROFESSIONAL EXPERIENCE
+# ============================================================
+
+--- Internship (Field Attachment) ---
+Organisation: National Social Security Fund (NSSF) Uganda
+Role:         Software Engineering Intern
+Duration:     June 2025 – August 2025 (3 months)
+Location:     Kampala, Uganda
+Result:       Awarded a top grade for the attachment
+
+About NSSF Uganda:
+NSSF Uganda is the country's largest mandatory social security savings institution, managing
+worker savings for millions of registered members. It operates enterprise-grade systems
+requiring the highest standards of security, reliability, and scalability.
+
+Responsibilities & Achievements:
+  - Contributed to development and maintenance of enterprise-level software applications
+    used by thousands of employees and millions of beneficiaries.
+  - Designed and integrated RESTful APIs to support critical internal systems and data flows.
+  - Worked with PostgreSQL and Firebase for secure data management and real-time features.
+  - Applied OOP principles in backend development using Java, PHP (Laravel), and Python (Django).
+  - Collaborated with cross-functional teams across engineering, product, and IT operations.
+  - Supported project management activities using Jira and ClickUp within Agile sprint workflows.
+  - Participated in code reviews and debugging sessions to ensure maintainability and performance.
+  - Assisted in deploying applications in Dockerized environments with CI/CD pipelines.
+  - Gained direct exposure to cybersecurity and network security practices for secure system design.
+
+
+# ============================================================
+# SECTION 5: PROJECTS
+# ============================================================
+
+--- Project 1: Afriplay Sports Feed ---
+Type:   Full-stack web platform (production)
+Stack:  Django, React, WebSockets, Railway, Vercel
+
+Description:
+Afriplay is a live real-time sports reporting and coverage platform built for local domestic
+sports coverage. It features role-separated portals for admins, moderators, and field reporters.
+Reporters submit live match events in real time; the system processes and broadcasts them to
+viewers via WebSocket connections with sub-second latency.
+
+Key Engineering Highlights:
+  - Real-time WebSocket architecture for live match centre functionality.
+  - Role-based access control (RBAC) for admin, moderator, and reporter workflows.
+  - Security hardening: JWT authentication, URL/slug/text sanitization, OWASP-compliant
+    input handling, and audit-ready logging.
+  - React frontend with performance optimizations: React.memo, useCallback, useMemo.
+  - Full ARIA accessibility compliance, skeleton loading states, and ErrorBoundary wrappers.
+  - Deployed on Railway (backend) and Vercel (frontend).
+
+Demonstrates: Real-time systems engineering, full-stack ownership, production deployment.
+
+
+--- Project 2: RefuConnect ---
+Type:   AI-powered humanitarian platform
+Stack:  Django, NLP (fastText, HuggingFace Transformers), Google Cloud
+
+Description:
+RefuConnect is a humanitarian feedback and case management platform designed for refugee
+settlements. It processes multilingual input using a real-time NLP pipeline that classifies,
+routes, and responds to feedback submitted by displaced populations.
+
+Key Engineering Highlights:
+  - Real-time NLP pipeline integrating fastText for language identification and HuggingFace
+    Transformers for multilingual text classification.
+  - Designed for low-bandwidth and intermittent-connectivity environments.
+  - Google Cloud deployment for reliability and scale.
+
+Demonstrates: AI/NLP engineering, social impact technology, research-to-production delivery.
+
+
+--- Project 3: SALT-KD ---
+Type:   AI/ML research system
+Stack:  Python, HuggingFace Transformers, Whisper (OpenAI), Knowledge Distillation
+
+Description:
+SALT-KD is a knowledge distillation system that compresses OpenAI's Whisper large-v2
+automatic speech recognition (ASR) model for deployment in low-resource local language
+contexts, specifically targeting Ugandan local languages: Luganda, Acholi, Runyankole,
+Ateso, Lugbara, Swahili, and Langi.
+
+Key Engineering Highlights:
+  - Knowledge distillation pipeline reducing Whisper large-v2 model size while preserving
+    transcription accuracy on low-resource local language audio.
+  - Fine-tuning on curated datasets across 7 Ugandan local languages.
+  - Designed to run on lower-cost hardware for constrained deployment environments.
+
+Demonstrates: Deep ML engineering, NLP research, low-resource local language AI system design.
+
+
+--- Project 4: 8TechBank ---
+Type:   Security research + production banking application
+Stack:  Flask, Jinja2, PostgreSQL, Docker, JWT
+
+Description:
+8TechBank is a dual-mode banking web application built in two parallel versions: (1) a
+deliberately vulnerable version exposing 6 common web security flaws for penetration testing
+education, and (2) a production-hardened secure version with all vulnerabilities remediated.
+
+Vulnerabilities Covered (Vulnerable Version):
+  - SQL Injection (login bypass and data exfiltration)
+  - Plaintext password storage
+  - Cross-Site Request Forgery (CSRF)
+  - Insecure Direct Object Reference (IDOR)
+  - Session misconfiguration (persistent, non-expiring sessions)
+  - Stored and Reflected Cross-Site Scripting (XSS)
+  - Missing HTTP security headers
+
+Security Controls (Hardened Version):
+  - Parameterised queries, bcrypt password hashing, CSRF tokens
+  - Object-level authorisation checks, secure session management
+  - Full security header suite (CSP and more)
+  - JWT-based API authentication
+  - Dockerized deployment with non-root user
+  - OWASP ASVS Level 1 alignment
+
+Demonstrates: Cybersecurity expertise, penetration testing knowledge, secure SDLC practices.
+
+
+--- Project 5: Balirah Beauty Salon Website ---
+Type:   Full-stack web application (client project)
+Stack:  Django 4.x, PostgreSQL, Bootstrap 5, Alpine.js, HTMX, AOS, Cloudinary, Railway
+Status: Development near complete (Version 1.0)
+
+Description:
+A full-featured, mobile-first web application built to digitise and enhance the operations
+of a combined barbershop and nail studio. It serves as both the public-facing platform and
+the complete content management backend, replacing manual phone-based scheduling with an
+integrated digital platform accessible 24/7.
+
+Key Features Delivered:
+  - Multi-step online appointment booking system with HTMX-powered step transitions,
+    double-booking prevention, and automated confirmation emails.
+  - Services showcase with pricing, duration, and tabbed categories (switchable via Alpine.js).
+  - Team profiles: stylist/technician bios with "Book with [Name]" CTA pre-filling the booking form.
+  - Filterable image gallery with lightbox modal, lazy loading, and AOS scroll animations.
+  - Promotions and discount engine: percentage-based discounts for special days with automatic
+    activation/expiry, original vs. discounted price display, and discount history reporting.
+  - Blog/CMS: SEO-optimised blog with rich text, category tagging, and draft/publish workflow.
+  - Testimonials carousel with admin-controlled approval workflow.
+  - FAQ page with Alpine.js accordion, admin-managed and category-grouped.
+  - Contact page with embedded Google Maps, WhatsApp Business floating button, and SMTP form.
+  - User authentication: optional client registration, role-based admin, session auto-expiry.
+  - Custom 404/500 error pages maintaining site branding.
+
+Technical Highlights:
+  - Design system: luxury warm cream and gold aesthetic with Playfair Display headings.
+  - Media handled via Cloudinary with WebP serving.
+  - Security: CSRF on all forms and HTMX requests, Django ORM (no raw SQL), HTTPS enforcement.
+  - Deployed on Railway with Cloudinary CDN for media; config managed via python-decouple.
+  - Modular Django app structure: separate apps for bookings, services, team, gallery, blog,
+    testimonials, promotions, discounts, FAQs, and contact.
+
+Demonstrates: Full client project ownership from SRS to deployment, Django mastery, real-world
+booking system engineering, and mobile-first UI development.
+
+
+--- Project 6: OCS — Operational Command System ---
+Type:   Enterprise SaaS web platform (in development)
+Stack:  TBD (REST API framework, RDBMS with ACID support, WebSockets, Meta Graph API)
+Status: SRS completed and approved; development commencing
+
+Description:
+OCS is a bespoke creative workflow management platform built to replace fragmented
+operations (messaging apps, email threads, shared drives, and manual spreadsheets) with
+a single, structured, role-governed system. It manages every creative asset from brief
+creation through to post-deployment performance reporting.
+
+Designed as an agency-agnostic SaaS product — a white-label platform licensable to
+different creative agencies without rebuilding the core.
+
+Core Features:
+  1. Brief Intake & Ticket Management — no brief = no ticket, strictly enforced.
+  2. Ten-Stage Creative Pipeline — sequential workflow: Brief Intake → Copywriting →
+     Copy Review (internal) → Client Copy Review → Creative Director Copy Review →
+     Design & Assets → Internal & Client Design Review → Final Sign-off →
+     Deployment & Publishing → After Action Review (AAR).
+  3. Campaign Management & Content Calendar — multi-asset planning, recurring templates,
+     client profitability view reconciling outputs with payment records.
+  4. Role-Based Access Control (RBAC) — 7 defined roles with server-side-validated
+     permission sets (System Administrator, Creative Director, Account Manager,
+     Traffic Manager, Copywriter, Designer, Digital Marketer).
+  5. Notification System — scheduled, non-dismissible deadline alerts; desktop push
+     notifications 30 minutes before every deadline; fully automated.
+  6. Document Versioning & Autosave — auto-save every ≤60 seconds; complete named
+     version history; no approved asset can be permanently deleted.
+  7. Internal Communication — real-time WebSocket-based chat replacing external
+     messaging apps; broadcast announcements; messages linkable to task records.
+  8. Analytics & Reporting — productivity reports, Meta Graph API integration for
+     post-deployment social media performance data, AAR case study generation.
+  9. Audit Trail — tamper-proof, immutable log of every deletion, modification,
+     approval, and role change; exportable as CSV or PDF.
+  10. Excel & Word Automation — full import/export of content calendars, reports,
+      briefs, and copy in .xlsx, .docx, and .pdf formats.
+
+Non-functional Targets:
+  - Page load: ≤3 seconds (50 concurrent users)
+  - Uptime: ≥99.5% during business hours
+  - Notification delivery: ≤10 seconds from trigger
+  - Security: OWASP Top 10 compliance, bcrypt/Argon2, TLS 1.2+, account lockout
+
+Demonstrates: Enterprise SaaS architecture, complex multi-role workflow systems, real-time
+communication, social media API integration, audit systems, and full IEEE SRS delivery.
+
+
+# ============================================================
+# SECTION 6: TECHNICAL SKILLS
+# ============================================================
+
+--- Backend Development ---
+  Languages:   Python, PHP, Java, JavaScript (Node.js)
+  Frameworks:  Django, Django REST Framework, Laravel, Flask
+  APIs:        RESTful APIs, GraphQL
+  Auth:        JWT, session-based auth, OAuth2
+  Security:    OWASP ASVS, CSRF protection, input sanitisation, bcrypt, CSP headers
+
+--- Frontend Development ---
+  Frameworks:  React, React Native, HTMX, Alpine.js
+  Styling:     Tailwind CSS, Bootstrap 5, custom CSS/SCSS
+  State:       useState, useReducer, Context API, React.memo, useCallback, useMemo
+  Animations:  AOS (Animate On Scroll)
+  A11y:        ARIA compliance, semantic HTML
+
+--- Databases ---
+  Relational:  PostgreSQL, MySQL, SQLite
+  NoSQL / RT:  Firebase Realtime Database, Firestore
+
+--- DevOps & Cloud ---
+  Containers:     Docker, Docker Compose
+  CI/CD:          GitHub Actions
+  Hosting:        Railway, Vercel, Google Cloud
+  Media/CDN:      Cloudinary
+  Version Control: Git, GitHub
+
+--- AI / ML ---
+  Frameworks:  HuggingFace Transformers, fastText
+  Models:      Whisper (OpenAI ASR), multilingual NLP classifiers
+  Techniques:  Knowledge distillation, fine-tuning, NLP pipelines, language identification
+
+--- Real-Time Systems ---
+  Protocols:  WebSockets (Django Channels)
+  Use Cases:  Live event feeds, real-time notifications, internal chat
+
+--- Project Management & Tooling ---
+  Tools:          Jira, ClickUp, GitHub Projects
+  Methodologies:  Agile (Scrum), sprint planning, code reviews
+
+--- Operating Systems ---
+  Linux (Ubuntu), Windows, WSL
+
+
+# ============================================================
+# SECTION 7: SOFT SKILLS & PROFESSIONAL ATTRIBUTES
+# ============================================================
+
+  - Strong written and verbal communication in English; able to explain technical decisions
+    clearly to both technical and non-technical stakeholders.
+  - Proven track record of end-to-end delivery — every listed project went through a full
+    lifecycle: architecture → development → testing → deployment → documentation.
+  - Comfortable in cross-functional, multi-disciplinary teams (demonstrated at NSSF Uganda).
+  - Self-directed learner: built production AI/ML systems and real-time platforms independently.
+  - Security-conscious by default: authentication, authorisation, and input validation are
+    standard practice across every system built, not afterthoughts.
+  - Committed to social impact through technology and human-centred system design.
+
+
+# ============================================================
+# SECTION 8: REFERENCES
+# ============================================================
+
+Reference 1:
+  Name:   Prof. Tonny Oyana
+  Title:  College Principal, CoCIS — Makerere University
+  Email:  tonny.oyana@mak.ac.ug
+
+Reference 2:
+  Name:   Dr. Joseph K. Balikuddembe
+  Title:  Dean, School of Computing and Informatics Technology (SCIT) — Makerere University
+  Email:  joseph.balikuddembe@mak.ac.ug
+  Note:   Dr. Balikuddembe provided a formal recommendation letter describing Akol Paul as
+          showing "a high level of dedication, organisation and a yearning to learn" and being
+          "a source of enlightenment to his peers."
+
+
+# ============================================================
+# SECTION 9: FREQUENTLY ASKED QUESTIONS (CHATBOT ANSWERS)
+# ============================================================
+
+Q: Who is Akol Paul?
+A: Akol Paul is a Software Engineer and final-year Bachelor of Science in Software Engineering
+   student at Makerere University, Uganda. He has professional experience from an internship
+   at a large public financial institution and has built multiple production systems spanning
+   fintech, real-time platforms, humanitarian AI, cybersecurity research, client web
+   applications, and enterprise SaaS platforms. He is open to full-time, contract, and
+   remote roles globally.
+
+Q: What is his educational background?
+A: Akol completed his secondary education (O-Level and A-Level) before enrolling at Makerere
+   University in 2022. He is currently in his 4th and final year of a Bachelor of Science in
+   Software Engineering programme. Coursework concludes June 2026, with graduation in January 2027.
+
+Q: What technologies does he work with?
+A: His primary stack includes Python (Django), PHP (Laravel), React, React Native, PostgreSQL,
+   Firebase, Docker, WebSockets, HTMX, Alpine.js, and Bootstrap. He also has AI/ML experience
+   with HuggingFace Transformers, fastText, and OpenAI's Whisper model. He deploys on Railway,
+   Vercel, Cloudinary, and Google Cloud.
+
+Q: What is his work experience?
+A: He completed a 3-month Software Engineering internship at the National Social Security Fund
+   (NSSF) Uganda from June to August 2025, working on enterprise systems using Django, Laravel,
+   Java, PostgreSQL, Firebase, and Docker. He received a top grade for the placement.
+
+Q: What projects has he built?
+A: He has built 6 projects:
+   1. Afriplay — a real-time local sports reporting and coverage platform with WebSockets and role-based portals.
+   2. RefuConnect — a humanitarian NLP platform for multilingual feedback processing.
+   3. SALT-KD — an AI knowledge distillation system for low-resource Ugandan local language ASR (Luganda, Acholi, Ateso, and more).
+   4. 8TechBank — a dual-mode secure/vulnerable banking app for cybersecurity research.
+   5. Balirah Beauty Salon — a full Django booking and CMS web app for a client (near complete).
+   6. OCS — an enterprise SaaS creative workflow platform (in development).
+
+Q: Tell me about the Balirah Beauty Salon project.
+A: Balirah Beauty Salon is a full-featured Django web application built for a combined
+   barbershop and nail studio. It features a multi-step online booking system with
+   HTMX-powered transitions and double-booking prevention, a services showcase, stylist
+   team profiles, a filterable image gallery, a promotions and discount engine with automatic
+   price adjustment and expiry, a blog CMS, testimonials, FAQ accordion, Google Maps
+   integration, a WhatsApp Business floating button, and a full Django Admin backend.
+   It is near complete and deployed on Railway with Cloudinary for media storage.
+
+Q: Tell me about the OCS project.
+A: OCS (Operational Command System) is an enterprise SaaS creative workflow platform. It
+   replaces fragmented communication and spreadsheet workflows with a single governed system
+   featuring a 10-stage creative pipeline, role-based access control for 7 user types, a
+   scheduled notification system, document versioning and autosave, real-time internal chat,
+   social media API integration for post-deployment analytics, and an immutable audit trail.
+   The SRS is complete (IEEE Std 830-1998 standard) and development is commencing. It is
+   designed to be licensable across multiple creative agencies.
+
+Q: Is he available for hire?
+A: Yes. Akol is open to full-time employment, contract work, and remote engagements globally.
+   You can reach him at paulakol97@gmail.com or +256 782 457 648.
+
+Q: Does he have experience with cybersecurity?
+A: Yes. He built 8TechBank — a penetration-testing educational platform covering SQL injection,
+   XSS, CSRF, IDOR, and session flaws — plus a hardened secure version aligned with OWASP
+   ASVS Level 1. He also applies secure coding practices (JWT, RBAC, CSP, input sanitisation)
+   as standard across all his production projects.
+
+Q: What is the BSSE programme at Makerere University?
+A: It is a 4-year undergraduate degree from the School of Computing and Informatics Technology
+   (SCIT) at Makerere University. It covers mathematics, OOP, systems architecture, web/mobile
+   development, AI/data, software engineering practice, and professional development — including
+   a mandatory internship and a major capstone project in the final year.
+
+Q: What languages does he speak?
+A: English (Fluent), Ateso (Fluent), and Luganda (Basic).
+
+Q: Where is he based?
+A: Kampala, Uganda. He is available for remote work globally and on-site roles locally.
+
+Q: Who are his referees?
+A: Prof. Tonny Oyana (College Principal, CoCIS, Makerere University) and Dr. Joseph K.
+   Balikuddembe (Dean, SCIT, Makerere University). Both have formally endorsed him.
+
+Q: What is his GitHub?
+A: https://github.com/akolpaul2244
+
+Q: What is his LinkedIn?
+A: https://www.linkedin.com/in/akol-paul-6b662a312/
+
+Q: Can he work with AI and machine learning?
+A: Yes. He has built production NLP systems using HuggingFace Transformers and fastText,
+   and a knowledge distillation pipeline compressing Whisper large-v2 for low-resource
+   language ASR. He is comfortable fine-tuning models and building AI-powered backends.
+
+Q: Has he worked on client projects?
+A: Yes. Balirah Beauty Salon is a live client project — a complete Django web application
+   covering booking systems, content management, promotions, and a full admin backend.
+   OCS is another client project: an enterprise SaaS workflow platform being built for
+   a creative agency.
+
+Q: Can he build SaaS or enterprise platforms?
+A: Yes. OCS is an enterprise SaaS platform currently in development, featuring multi-role
+   access control, a 10-stage workflow pipeline, real-time notifications, document versioning,
+   audit trails, social media API integration, and Excel/Word automation. It is designed
+   to be licensable across multiple organisations.
+
+Q: What soft skills does he have?
+A: Strong communication (written and verbal), teamwork, time management, and project
+   management (Jira, ClickUp, Agile). He is known for being reliable, self-directed,
+   and thorough — every project he ships goes through the full lifecycle from architecture
+   to documentation.
+
+Q: Can he work remotely?
+A: Yes. He is fully set up for remote work and is open to international remote engagements
+   across any time zone.
