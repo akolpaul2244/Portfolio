@@ -1,7 +1,3 @@
-"""
-AkolPaul.dev – Production-Ready Settings
-Supports SQLite (dev) → PostgreSQL (prod) via DATABASE_URL
-"""
 from pathlib import Path
 from decouple import config, Csv
 import os
@@ -9,9 +5,8 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# ============================================================
+
 # SECURITY
-# ============================================================
 
 SECRET_KEY = config('SECRET_KEY')  # No default — must be set in environment
 DEBUG = config('DEBUG', default=False, cast=bool)
@@ -21,9 +16,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv(
 ALLOWED_HOSTS += []  # Railway injects the domain automatically via ALLOWED_HOSTS env var
 
 
-# ============================================================
 # APPLICATIONS
-# ============================================================
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,9 +30,7 @@ INSTALLED_APPS = [
 ]
 
 
-# ============================================================
 # MIDDLEWARE
-# ============================================================
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -74,9 +65,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 
-# ============================================================
+
 # DATABASE
-# ============================================================
+
 
 DATABASE_URL = config('DATABASE_URL', default='')
 if DATABASE_URL:
@@ -97,9 +88,9 @@ else:
     }
 
 
-# ============================================================
+
 # PASSWORD VALIDATION
-# ============================================================
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
@@ -109,9 +100,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# ============================================================
+
 # LOCALISATION
-# ============================================================
+
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'Africa/Kampala'
@@ -119,14 +110,15 @@ USE_I18N = True
 USE_TZ = True
 
 
-# ============================================================
+
 # STATIC & MEDIA FILES
-# ============================================================
+
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+os.makedirs(STATIC_ROOT, exist_ok=True)
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -134,9 +126,9 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# ============================================================
+
 # SECURITY HEADERS
-# ============================================================
+
 
 # Always-on headers (dev + prod)
 SECURE_BROWSER_XSS_FILTER = True
@@ -170,9 +162,7 @@ CSRF_TRUSTED_ORIGINS = config(
 )
 
 
-# ============================================================
 # CONTENT SECURITY POLICY (django-csp)
-# ============================================================
 
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = (
@@ -194,15 +184,14 @@ CSP_FONT_SRC = (
     "https://cdnjs.cloudflare.com",
 )
 CSP_IMG_SRC = ("'self'", "data:", "https:")
-CSP_CONNECT_SRC = ("'self'", "https://api.github.com")  # GitHub activity chart
-CSP_FRAME_ANCESTORS = ("'none'",)                        # Equivalent to X-Frame-Options: DENY
-CSP_BASE_URI = ("'self'",)                               # Prevent base tag hijacking
-CSP_FORM_ACTION = ("'self'",)                            # Forms can only submit to same origin
+CSP_CONNECT_SRC = ("'self'", "https://api.github.com", "https://api.groq.com")  
+CSP_FRAME_ANCESTORS = ("'none'",)                       
+CSP_BASE_URI = ("'self'",)                              
+CSP_FORM_ACTION = ("'self'",)                           
 
 
-# ============================================================
+
 # EMAIL (CONTACT FORM)
-# ============================================================
 
 EMAIL_BACKEND = config(
     'EMAIL_BACKEND',
@@ -218,9 +207,8 @@ CONTACT_EMAIL = config('CONTACT_EMAIL', default='')
 SERVER_EMAIL = config('EMAIL_HOST_USER', default='')
 
 
-# ============================================================
+
 # CACHE (FOR RATE LIMITING)
-# ============================================================
 
 CACHES = {
     'default': {
@@ -229,9 +217,7 @@ CACHES = {
 }
 
 
-# ============================================================
-# LOGGING
-# ============================================================
+#  LOGGING
 
 LOGGING = {
     'version': 1,
@@ -262,8 +248,6 @@ LOGGING = {
 }
 
 
-# ============================================================
 # THIRD-PARTY API KEYS
-# ============================================================
 
 GROQ_API_KEY = config('GROQ_API_KEY', default='')
