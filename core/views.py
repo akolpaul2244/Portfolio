@@ -11,16 +11,15 @@ from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.html import escape
-from django.views.decorators.csrf import csrf_protect
+from django.views.decorators.csrf import csrf_protect, ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 
-from groq import Groq
+from groq import Groq, RateLimitError
 from langdetect import DetectorFactory, detect
 from textblob import TextBlob
 
 from .forms import ContactForm
 from .models import Experience, Project, Skill, Testimonial
-from django.views.decorators.csrf import ensure_csrf_cookie
 
 try:
     from django_ratelimit.decorators import ratelimit
@@ -33,14 +32,18 @@ DetectorFactory.seed = 0
 logger = logging.getLogger(__name__)
 
 
-# Constants
+# ── Constants ──────────────────────────────────────────────────────────────────
 
+_MAX_MSG_LEN  = 500       # tighter than before — reduces token usage per request
+_MAX_FEEDBACK = 2_000
+_MAX_CAT_LEN  = 50
+_CACHE_SKILLS = "skills_grouped"
+_CACHE_TTL    = 60 * 15  # 15 minutes
 
-_MAX_MSG_LEN   = 1_000
-_MAX_FEEDBACK  = 2_000
-_MAX_CAT_LEN   = 50
-_CACHE_SKILLS  = "skills_grouped"
-_CACHE_TTL     = 60 * 15  # 15 minutes
+# llama-3.1-8b-instant: separate TPD bucket from 70b, ~10x fewer tokens per call.
+# More than sufficient for FAQ-style portfolio questions.
+_GROQ_MODEL      = "llama-3.1-8b-instant"
+_GROQ_MAX_TOKENS = 300   # portfolio answers don't need to be long
 
 DEMO_BACKEND: list[dict] = [
     {"name": "Django",     "proficiency": 92},
@@ -70,11 +73,9 @@ DEMO_TOOLS: list[str] = [
     "Django", "Python", "React", "Laravel", "PostgreSQL", "Redis",
     "Docker", "Git", "WebSockets", "Celery", "NGINX", "AWS S3",
     "Pandas", "Scikit-learn", "HuggingFace", "Tailwind CSS", "Vue.js",
-    "REST APIs", "GraphQL", "Linux", "Figma", "Chart.js",
-    "Stripe API",
+    "REST APIs", "GraphQL", "Linux", "Figma", "Chart.js", "Stripe API",
 ]
 
-# Categories that must always appear, backed by demo data when absent from DB.
 _DEMO_CATEGORIES: dict[str, list[dict]] = {
     "Backend":  DEMO_BACKEND,
     "Frontend": DEMO_FRONTEND,
@@ -103,9 +104,27 @@ _TOPIC_KEYWORDS: dict[str, list[str]] = {
     "Protection":    ["safe", "violence", "abuse", "protect", "security"],
 }
 
+# Compact system prompt — keeps token usage low on every request.
+# The full portfolio context is appended from portfolio_context.txt.
+_SYSTEM_PROMPT_PREFIX = (
+    "You are Akol Paul's portfolio assistant. Answer questions about him "
+    "concisely and professionally using only the context below. "
+    "If you cannot answer from the context, direct the visitor to "
+    "paulakol97@gmail.com. Keep replies short — two to four sentences max.\n\n"
+)
 
-# Internal helpers
+_RATE_LIMIT_REPLY = (
+    "I'm handling a lot of requests right now — please try again in a few minutes. "
+    "You can also reach Akol directly at paulakol97@gmail.com."
+)
 
+_ERROR_REPLY = (
+    "Something went wrong on my end. "
+    "Please contact Akol directly at paulakol97@gmail.com."
+)
+
+
+# ── Internal helpers ───────────────────────────────────────────────────────────
 
 def _ratelimit(key: str, rate: str, block: bool = True):
     """No-op decorator factory when django-ratelimit is not installed."""
@@ -129,6 +148,10 @@ def _get_groq_client() -> "Groq | None":
 
 
 def _get_portfolio_context() -> str:
+    """
+    Load the portfolio context file that feeds the AI assistant.
+    Keep this file under 800 tokens to stay well within daily limits.
+    """
     path = os.path.join(settings.BASE_DIR, "core", "data", "portfolio_context.txt")
     try:
         with open(path, "r", encoding="utf-8") as fh:
@@ -140,7 +163,7 @@ def _get_portfolio_context() -> str:
 
 def _parse_json_body(request) -> "tuple[dict, str | None]":
     """
-    Parse JSON from request body.
+    Parse JSON from the request body.
     Returns (payload, error_message). error_message is None on success.
     """
     try:
@@ -169,7 +192,6 @@ def _build_grouped_skills() -> dict:
     for skill in Skill.objects.all().order_by("category", "-proficiency"):
         grouped.setdefault(skill.get_category_display(), []).append(skill)
 
-    # Guarantee that every demo category is present even with an empty DB.
     for cat, demo_list in _DEMO_CATEGORIES.items():
         if cat not in grouped:
             grouped[cat] = [SimpleNamespace(**s) for s in demo_list]
@@ -178,8 +200,7 @@ def _build_grouped_skills() -> dict:
     return grouped
 
 
-
-# Page views
+# ── Page views ─────────────────────────────────────────────────────────────────
 
 @ensure_csrf_cookie
 def home(request):
@@ -262,7 +283,7 @@ def contact(request):
     if request.method != "POST":
         return render(request, "contact.html", {"form": ContactForm(), "page": "contact"})
 
-    # Honeypot check
+    # Honeypot — bots fill hidden fields that real users never see
     if request.POST.get("website", "").strip():
         return redirect("contact")
 
@@ -289,9 +310,7 @@ def contact(request):
     return redirect("contact")
 
 
-
-# API views
-
+# ── API views ──────────────────────────────────────────────────────────────────
 
 @require_POST
 @_ratelimit(key="ip", rate="10/m")
@@ -309,30 +328,29 @@ def ai_chat(request):
         return _json_error("Message cannot be empty.", status=400)
 
     context_text = _get_portfolio_context()
+    system_content = _SYSTEM_PROMPT_PREFIX + context_text
 
     try:
         response = groq_client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model=_GROQ_MODEL,
             messages=[
-                {
-                    "role": "system",
-                    "content": (
-                        "You are a helpful assistant for Akol Paul's portfolio. "
-                        "Answer only based on the provided context. "
-                        "Be concise, professional, and friendly.\n\n"
-                        f"{context_text}"
-                    ),
-                },
-                {"role": "user", "content": user_message},
+                {"role": "system", "content": system_content},
+                {"role": "user",   "content": user_message},
             ],
-            temperature=0.7,
-            max_tokens=500,
+            temperature=0.6,
+            max_tokens=_GROQ_MAX_TOKENS,
         )
         reply = response.choices[0].message.content
         return JsonResponse({"success": True, "reply": reply})
+
+    except RateLimitError:
+        # Return 200 so the frontend renders a friendly bubble instead of a generic error
+        logger.warning("Groq rate limit reached — returning user-facing message")
+        return JsonResponse({"success": True, "reply": _RATE_LIMIT_REPLY})
+
     except Exception:
         logger.exception("Groq API call failed")
-        return _json_error("Something went wrong. Please try again.", status=502)
+        return JsonResponse({"success": True, "reply": _ERROR_REPLY})
 
 
 @require_POST
@@ -340,7 +358,6 @@ def ai_chat(request):
 def refuconnect_demo(request):
     payload, err = _parse_json_body(request)
     if err:
-        # Fall back to POST form data
         text = request.POST.get("feedback_text", "").strip()[:_MAX_FEEDBACK]
     else:
         text = payload.get("feedback_text", "").strip()[:_MAX_FEEDBACK]
@@ -396,9 +413,7 @@ def refuconnect_demo(request):
         })
 
 
-
-# Error handlers
-
+#  Error handlers 
 
 def handler404(request, exception):
     return render(request, "404.html", status=404)
