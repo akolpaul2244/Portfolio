@@ -10,14 +10,32 @@
 {% block extra_css %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js" defer></script>
 <style>
-  
+  /* Hero heading — fluid scale, never wraps on any viewport */
   .hero-name-heading {
     font-size: clamp(2.1rem, 11vw, 6rem);
     line-height: 0.95;
     white-space: nowrap;
   }
 
-  
+  /* CTA row — always a single horizontal row, centred items */
+  .hero-ctas {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  /* Each CTA button takes equal width on small screens */
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-outline {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  /* Orbit diagram sizing */
   .hero-orbit-card {
     --orbit-size: clamp(170px, 52vw, 260px);
     position: relative;
@@ -34,6 +52,7 @@
     font-size: clamp(1rem, calc(var(--orbit-size) * 0.09), 1.5rem);
   }
 
+  /* Orbit rings */
   .hero-orbit-ring {
     position: absolute;
     top: 50%;
@@ -55,6 +74,7 @@
     animation: orbitSpin 24s linear infinite reverse;
   }
 
+  /* Icons mounted on orbit rings */
   .hero-orbit-icon {
     position: absolute;
     width: clamp(28px, calc(var(--orbit-size) * 0.16), 44px);
@@ -72,36 +92,22 @@
     font-size: clamp(0.75rem, calc(var(--orbit-size) * 0.045), 1.1rem);
   }
 
+  /* Cardinal positions on the ring */
   .hero-orbit-icon--top    { top: 0;    left: 50%; transform: translate(-50%, -50%); }
   .hero-orbit-icon--bottom { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
   .hero-orbit-icon--right  { top: 50%;  right: 0;  transform: translate(50%, -50%); }
   .hero-orbit-icon--left   { top: 50%;  left: 0;   transform: translate(-50%, -50%); }
 
-  
-  .hero-orbit-icon--top {
-    animation: orbitCounterSpinTop 14s linear infinite;
-  }
-  .hero-orbit-icon--bottom {
-    animation: orbitCounterSpinBottom 14s linear infinite;
-  }
-  .hero-orbit-icon--right {
-    animation: orbitCounterSpinRight 14s linear infinite;
-  }
-  .hero-orbit-icon--left {
-    animation: orbitCounterSpinLeft 14s linear infinite;
-  }
-  .hero-orbit-ring--outer .hero-orbit-icon--top {
-    animation: orbitCounterSpinTop 24s linear infinite reverse;
-  }
-  .hero-orbit-ring--outer .hero-orbit-icon--bottom {
-    animation: orbitCounterSpinBottom 24s linear infinite reverse;
-  }
-  .hero-orbit-ring--outer .hero-orbit-icon--right {
-    animation: orbitCounterSpinRight 24s linear infinite reverse;
-  }
-  .hero-orbit-ring--outer .hero-orbit-icon--left {
-    animation: orbitCounterSpinLeft 24s linear infinite reverse;
-  }
+  /* Counter-spin so icons stay upright as the ring rotates */
+  .hero-orbit-icon--top    { animation: orbitCounterSpinTop    14s linear infinite; }
+  .hero-orbit-icon--bottom { animation: orbitCounterSpinBottom 14s linear infinite; }
+  .hero-orbit-icon--right  { animation: orbitCounterSpinRight  14s linear infinite; }
+  .hero-orbit-icon--left   { animation: orbitCounterSpinLeft   14s linear infinite; }
+
+  .hero-orbit-ring--outer .hero-orbit-icon--top    { animation: orbitCounterSpinTop    24s linear infinite reverse; }
+  .hero-orbit-ring--outer .hero-orbit-icon--bottom { animation: orbitCounterSpinBottom 24s linear infinite reverse; }
+  .hero-orbit-ring--outer .hero-orbit-icon--right  { animation: orbitCounterSpinRight  24s linear infinite reverse; }
+  .hero-orbit-ring--outer .hero-orbit-icon--left   { animation: orbitCounterSpinLeft   24s linear infinite reverse; }
 
   @keyframes orbitSpin {
     from { transform: translate(-50%, -50%) rotate(0deg); }
@@ -123,12 +129,23 @@
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to   { transform: translate(-50%, -50%) rotate(-360deg); }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-orbit-ring--inner,
+    .hero-orbit-ring--outer,
+    .hero-orbit-icon--top,
+    .hero-orbit-icon--bottom,
+    .hero-orbit-icon--right,
+    .hero-orbit-icon--left {
+      animation: none;
+    }
+  }
 </style>
 {% endblock %}
 
 {% block content %}
 
-{#  HERO  #}
+{# HERO #}
 <section class="relative min-h-screen flex items-center hero-bg overflow-hidden" aria-label="Introduction">
   <canvas id="particles-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
 
@@ -142,7 +159,7 @@
   <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-24 w-full">
     <div class="grid lg:grid-cols-2 gap-10 xl:gap-20 items-center">
 
-      
+      {# Left column — text content #}
       <div>
         <div class="hero-label inline-flex items-center gap-2.5 bg-brand/5 border border-brand/15 rounded-full px-4 py-1.5 mb-6 sm:mb-8">
           <span class="w-2 h-2 rounded-full bg-jade animate-pulse flex-shrink-0" aria-hidden="true"></span>
@@ -163,16 +180,17 @@
           I build <strong class="text-slate-800 dark:text-white font-semibold">scalable, secure, and impactful systems</strong> — from real-time fintech platforms to ML/AI-powered tools — crafted with precision and shipped for the world.
         </p>
 
-        <div class="hero-ctas flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mb-10 sm:mb-14">
+        {# CTA buttons — flex-row always, wrap prevented, equal width on mobile #}
+        <div class="hero-ctas mb-10 sm:mb-14">
           <a href="{% url 'projects' %}"
-             class="btn-primary magnetic-btn group w-full sm:w-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+             class="btn-primary magnetic-btn group focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
             <span class="flex items-center justify-center gap-2">
               <i class="fas fa-rocket text-sm" aria-hidden="true"></i>
               View My Work
             </span>
           </a>
           <a href="{% url 'contact' %}"
-             class="btn-outline w-full sm:w-auto focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
+             class="btn-outline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
             <span class="flex items-center justify-center gap-2">
               <i class="fas fa-paper-plane text-sm" aria-hidden="true"></i>
               Let's Talk
@@ -203,13 +221,11 @@
         </div>
       </div>
 
-      
+      {# Right column — orbit diagram and GitHub activity #}
       <div class="flex flex-col items-center gap-6 sm:gap-8">
 
-        {# Orbit diagram card #}
         <div class="w-full glass-card py-8 sm:py-10 flex items-center justify-center" aria-hidden="true">
           <div class="hero-orbit-card">
-            {# Centre icon #}
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20">
               <div class="hero-orbit-centre rounded-2xl flex items-center justify-center"
                    style="background:linear-gradient(135deg,#4f46e5,#22d3ee);box-shadow:0 0 40px rgba(79,70,229,0.45);">
@@ -217,7 +233,6 @@
               </div>
             </div>
 
-            {# Inner orbit #}
             <div class="hero-orbit-ring hero-orbit-ring--inner">
               <div class="hero-orbit-icon hero-orbit-icon--top">
                 <i class="fab fa-python" style="color:#3776AB;" title="Python"></i>
@@ -233,7 +248,6 @@
               </div>
             </div>
 
-            {# Outer orbit #}
             <div class="hero-orbit-ring hero-orbit-ring--outer">
               <div class="hero-orbit-icon hero-orbit-icon--top">
                 <i class="fas fa-cloud" style="color:#22d3ee;" title="Cloud"></i>
@@ -250,11 +264,11 @@
             </div>
 
             <div class="absolute inset-0 rounded-full pointer-events-none"
-                 style="background:radial-gradient(circle,rgba(79,70,229,0.08),transparent 70%);filter:blur(24px);"></div>
+                 style="background:radial-gradient(circle,rgba(79,70,229,0.08),transparent 70%);filter:blur(24px);"
+                 aria-hidden="true"></div>
           </div>
         </div>
 
-        {# GitHub activity card #}
         <div class="w-full max-w-xs sm:max-w-sm glass-card p-4 sm:p-5"
              aria-label="GitHub contribution activity">
           <div class="flex items-center justify-between mb-3">
@@ -280,7 +294,6 @@
           </p>
         </div>
 
-        {# Social icons #}
         <div class="flex items-center gap-3">
           <a href="https://github.com/akolpaul2244"
              target="_blank"
@@ -316,7 +329,7 @@
 
 <div class="kente-divider mx-4 sm:mx-6 md:mx-auto md:max-w-5xl rounded-full my-0" aria-hidden="true"></div>
 
-{#  FEATURED PROJECTS  #}
+{# FEATURED PROJECTS #}
 <section class="py-20 sm:py-28 bg-slate-50 dark:bg-ink-800 relative overflow-hidden"
          aria-labelledby="featured-heading">
   <div class="absolute inset-0 bg-kente opacity-25 pointer-events-none" aria-hidden="true"></div>
@@ -423,7 +436,7 @@
   </div>
 </section>
 
-{#  EXPERTISE  #}
+{# EXPERTISE #}
 <section class="py-20 sm:py-28 bg-white dark:bg-ink" aria-labelledby="expertise-heading">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12 sm:mb-16 reveal">
@@ -499,7 +512,7 @@
   </div>
 </section>
 
-{#  CREDENTIALS STRIP  #}
+{# CREDENTIALS STRIP #}
 <section class="py-16 sm:py-20 bg-slate-50 dark:bg-ink-800 relative overflow-hidden"
          aria-labelledby="credentials-heading">
   <div class="absolute inset-0 bg-kente opacity-20 pointer-events-none" aria-hidden="true"></div>
@@ -556,7 +569,7 @@
   </div>
 </section>
 
-{#  CTA BANNER  #}
+{# CTA BANNER #}
 <section class="py-20 sm:py-24 relative overflow-hidden" aria-labelledby="cta-heading">
   <div class="absolute inset-0"
        style="background:linear-gradient(135deg,#4f46e5 0%,#22d3ee 100%);"
@@ -610,9 +623,9 @@
   }
 
   function getWeekBuckets(events) {
-    var now    = Date.now();
+    var now     = Date.now();
     var MS_WEEK = 7 * 24 * 60 * 60 * 1000;
-    var NUM    = 12;
+    var NUM     = 12;
     var buckets = new Array(NUM).fill(0);
     events.forEach(function (ev) {
       var age = now - new Date(ev.created_at).getTime();
@@ -668,9 +681,9 @@
           legend: { display: false },
           tooltip: {
             backgroundColor: isDark ? '#1a1330' : '#fff',
-            titleColor: isDark ? '#e2e8f0' : '#0f172a',
-            bodyColor:  isDark ? '#94a3b8' : '#64748b',
-            borderColor: isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0',
+            titleColor:      isDark ? '#e2e8f0' : '#0f172a',
+            bodyColor:       isDark ? '#94a3b8' : '#64748b',
+            borderColor:     isDark ? 'rgba(255,255,255,0.1)' : '#e2e8f0',
             borderWidth: 1,
             padding: 10,
             callbacks: {
