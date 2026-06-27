@@ -446,13 +446,7 @@ a { text-decoration: none; color: inherit; }
   transform: translateY(-1px);
 }
 
-/* ─── SKILL BARS ────────────────────────────────────────────────────
-   Uses width transition (not scaleX) so inline style="width:X%"
-   is the animation target. JS sets --bar-target on each element
-   and adds .animated after the parent card becomes visible.
-   This prevents the AI/ML card's delay-200 from causing bars
-   to transition while the card is still opacity:0.
-─────────────────────────────────────────────────────────────────── */
+/* ─── SKILL BARS  */
 .skill-bar-fill {
   height: 100%;
   border-radius: 99px;
@@ -632,6 +626,42 @@ a { text-decoration: none; color: inherit; }
 .chat-input:focus {
   border-color: var(--brand);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+/* Mobile keyboard fix */
+
+@media (max-width: 768px) {
+  #ai-chat-modal .chat-glass {
+    height: 88dvh;
+    max-height: 88dvh;
+    border-radius: 1.25rem 1.25rem 0 0;
+    min-height: 0;
+  }
+
+  #ai-chat-modal #chat-messages {
+    min-height: 0;
+    flex: 1;
+  }
+
+  .safe-area-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+}
+
+.chat-panel {
+  height: 88dvh;
+  max-height: 88dvh;
+}
+ 
+@media (min-width: 768px) {
+  .chat-panel {
+    height: 600px;
+    max-height: 600px;
+  }
+}
+ 
+/* Safe area padding for notched phones (iPhone X+) */
+.chat-input-row {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
 }
 
 .chat-scroll {

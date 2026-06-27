@@ -2,7 +2,7 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>{% block title %}Akol Paul — Software Engineer{% endblock %}</title>
   <meta name="description" content="{% block meta_description %}Software Engineer specialising in Django, React, and AI/ML. Building scalable, secure systems for fintech, humanitarian tech, and beyond.{% endblock %}">
   <meta name="author" content="Akol Paul">
@@ -90,7 +90,6 @@
        class="fixed inset-0 z-[200] bg-ink pointer-events-none opacity-0"
        aria-hidden="true"></div>
 
-  {# ── Navigation ───────────────────────────────────────────────────────────── #}
   <header role="banner">
     <nav id="navbar" aria-label="Main navigation" class="fixed top-0 inset-x-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8">
@@ -100,8 +99,7 @@
             <span class="relative font-display text-xl font-bold tracking-tight">
               <span class="text-slate-900 dark:text-white">akol</span><span class="text-brand">.dev</span>
               <span class="absolute -bottom-0.5 left-0 w-0 h-px bg-gradient-to-r from-brand to-cyan
-                           group-hover:w-full transition-all duration-500"
-                    aria-hidden="true"></span>
+                           group-hover:w-full transition-all duration-500" aria-hidden="true"></span>
             </span>
           </a>
 
@@ -134,8 +132,7 @@
                 Let's Build Together
               </span>
               <span class="absolute inset-0 bg-gradient-to-r from-brand to-cyan opacity-0
-                           group-hover:opacity-100 transition-opacity duration-300"
-                    aria-hidden="true"></span>
+                           group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></span>
             </a>
 
             <button id="mobile-menu-btn"
@@ -179,12 +176,10 @@
     {% block content %}{% endblock %}
   </main>
 
-  {# ── Footer ───────────────────────────────────────────────────────────────── #}
   <footer role="contentinfo"
           class="relative bg-slate-50 dark:bg-ink-800 border-t border-slate-200
                  dark:border-white/5 overflow-hidden">
     <div class="absolute inset-0 bg-kente opacity-30 pointer-events-none" aria-hidden="true"></div>
-
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 mb-10 sm:mb-12">
 
@@ -202,9 +197,7 @@
         </div>
 
         <div>
-          <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">
-            Navigation
-          </h3>
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">Navigation</h3>
           <ul class="space-y-2 text-sm list-none p-0">
             <li><a href="{% url 'about' %}"      class="footer-link">About</a></li>
             <li><a href="{% url 'projects' %}"   class="footer-link">Projects</a></li>
@@ -215,16 +208,12 @@
         </div>
 
         <div class="sm:col-span-2 md:col-span-1">
-          <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">
-            Get In Touch
-          </h3>
+          <h3 class="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-4">Get In Touch</h3>
           <ul class="space-y-3 text-sm list-none p-0">
             <li class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400">
               <i class="fas fa-envelope w-4 text-center text-brand text-xs" aria-hidden="true"></i>
               <a href="https://mail.google.com/mail/?view=cm&amp;to=paulakol97@gmail.com"
-                 target="_blank"
-                 rel="noopener noreferrer"
-                 class="footer-link">paulakol97@gmail.com</a>
+                 target="_blank" rel="noopener noreferrer" class="footer-link">paulakol97@gmail.com</a>
             </li>
             <li class="flex items-center gap-2.5 text-slate-500 dark:text-slate-400">
               <i class="fas fa-map-marker-alt w-4 text-center text-brand text-xs" aria-hidden="true"></i>
@@ -232,25 +221,17 @@
             </li>
           </ul>
           <div class="flex gap-3 mt-5 sm:mt-6">
-            <a href="https://github.com/akolpaul2244"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="GitHub"
-               class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl">
+            <a href="https://github.com/akolpaul2244" target="_blank" rel="noopener noreferrer"
+               aria-label="GitHub" class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl">
               <i class="fab fa-github text-base" aria-hidden="true"></i>
             </a>
-            <a href="https://www.linkedin.com/in/akol-paul-6b662a312/"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="LinkedIn"
-               class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl">
+            <a href="https://www.linkedin.com/in/akol-paul-6b662a312/" target="_blank" rel="noopener noreferrer"
+               aria-label="LinkedIn" class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl">
               <i class="fab fa-linkedin-in text-base" aria-hidden="true"></i>
             </a>
             <a href="https://mail.google.com/mail/?view=cm&amp;to=paulakol97@gmail.com"
-               target="_blank"
-               rel="noopener noreferrer"
-               aria-label="Send email"
-               class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl">
+               target="_blank" rel="noopener noreferrer"
+               aria-label="Send email" class="social-icon focus:outline-none focus-visible:ring-2 focus-visible:ring-brand rounded-xl">
               <i class="fas fa-envelope text-base" aria-hidden="true"></i>
             </a>
           </div>
@@ -270,9 +251,8 @@
     </div>
   </footer>
 
-  {#  AI Chat bubble + modal  #}
+  {# Chat trigger button — fixed bottom-right #}
   <div class="fixed bottom-6 right-4 sm:right-6 z-50 flex flex-col items-end gap-2">
-
     <div id="chat-tooltip"
          class="flex items-center gap-2 bg-white dark:bg-ink-700 text-slate-700 dark:text-slate-200
                 text-xs font-semibold px-3 py-2 rounded-xl shadow-lg border border-slate-200
@@ -281,7 +261,6 @@
       <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse flex-shrink-0"></span>
       Chat with Paul's AI
     </div>
-
     <button id="ai-chat-btn"
             aria-label="Open AI assistant"
             aria-expanded="false"
@@ -306,34 +285,32 @@
     Install App
   </button>
 
-  {#  Chat modal  #}
+  {# Chat modal — slides up from bottom on mobile, centred on desktop #}
   <div id="ai-chat-modal"
-       class="hidden fixed inset-0 items-end md:items-center justify-center z-[100] p-0 md:p-6"
+       class="hidden fixed inset-x-0 bottom-0 md:inset-0 items-end md:items-center justify-center z-[100] p-0 md:p-6"
        style="background:rgba(10,8,30,0.72);backdrop-filter:blur(8px);"
        role="dialog"
        aria-modal="true"
        aria-label="AI Assistant"
        aria-labelledby="chat-modal-title">
 
-    <div class="chat-glass w-full max-w-lg md:rounded-3xl flex flex-col
-                h-[88vh] md:h-[600px] overflow-hidden">
+    {# Inner panel — dvh on mobile so keyboard doesn't push it off screen #}
+    <div class="chat-glass w-full max-w-lg md:rounded-3xl rounded-t-2xl flex flex-col overflow-hidden chat-panel">
 
+      {# Header #}
       <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-white/8
                   flex items-center justify-between flex-shrink-0">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
-               style="background:linear-gradient(135deg,#4f46e5,#22d3ee)"
-               aria-hidden="true">
+               style="background:linear-gradient(135deg,#4f46e5,#22d3ee)" aria-hidden="true">
             <i class="fas fa-robot text-white text-sm"></i>
           </div>
           <div>
-            <p id="chat-modal-title"
-               class="font-display font-bold text-sm text-slate-800 dark:text-slate-100">
+            <p id="chat-modal-title" class="font-display font-bold text-sm text-slate-800 dark:text-slate-100">
               Akol's AI Assistant
             </p>
             <p class="text-xs text-jade flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse inline-block"
-                    aria-hidden="true"></span>
+              <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse inline-block" aria-hidden="true"></span>
               Online — ask me anything
             </p>
           </div>
@@ -348,14 +325,13 @@
         </button>
       </div>
 
-      {# Message thread #}
+      {# Message thread — min-h-0 is required for flex overflow to work correctly #}
       <div id="chat-messages"
-           class="flex-1 p-4 sm:p-5 overflow-y-auto space-y-4 chat-scroll"
+           class="flex-1 min-h-0 p-4 sm:p-5 overflow-y-auto space-y-4 chat-scroll"
            role="log"
            aria-live="polite"
            aria-label="Chat messages">
 
-        {# Welcome bubble — no emoji, FA icon only #}
         <div class="chat-bubble-ai">
           <p>
             <i class="fas fa-hand-point-right text-brand mr-1.5 text-xs" aria-hidden="true"></i>
@@ -365,7 +341,6 @@
           </p>
         </div>
 
-        {# Suggest chips — FA icons replace all emoji #}
         <div class="flex flex-wrap gap-2 pl-1" role="group" aria-label="Suggested questions">
           <button class="chat-suggest" onclick="sendSuggest(this)">
             <i class="fas fa-rocket text-[10px]" aria-hidden="true"></i>
@@ -386,8 +361,8 @@
         </div>
       </div>
 
-      {# Input row #}
-      <div class="p-3 sm:p-4 border-t border-slate-200 dark:border-white/8 flex-shrink-0">
+      {# Input row — flex-shrink-0 keeps it pinned above the keyboard #}
+      <div class="p-3 sm:p-4 border-t border-slate-200 dark:border-white/8 flex-shrink-0 chat-input-row">
         <div class="flex gap-2">
           <label for="chat-input" class="sr-only">Message</label>
           <input type="text"
@@ -396,6 +371,8 @@
                  placeholder="Ask about projects, skills, availability…"
                  autocomplete="off"
                  maxlength="500"
+                 inputmode="text"
+                 enterkeyhint="send"
                  aria-label="Message input">
           <button id="send-message"
                   class="w-11 h-11 rounded-xl flex items-center justify-center text-white
@@ -410,6 +387,7 @@
           Responses are AI-generated and may not be fully accurate.
         </p>
       </div>
+
     </div>
   </div>
 
@@ -421,22 +399,21 @@
 
   <script src="{% static 'js/main.js' %}" defer></script>
 
+  {# Tooltip auto-hide — runs inline so it works before main.js defers #}
   <script>
   (function () {
     'use strict';
     var btn     = document.getElementById('ai-chat-btn');
     var tooltip = document.getElementById('chat-tooltip');
     if (!btn || !tooltip) return;
-
-    function hideTooltip() {
-      tooltip.style.opacity  = '0';
+    function hide() {
+      tooltip.style.opacity   = '0';
       tooltip.style.transform = 'translateY(4px)';
       setTimeout(function () { tooltip.style.display = 'none'; }, 500);
-      btn.removeEventListener('click', hideTooltip);
+      btn.removeEventListener('click', hide);
     }
-
-    setTimeout(hideTooltip, 6000);
-    btn.addEventListener('click', hideTooltip);
+    setTimeout(hide, 6000);
+    btn.addEventListener('click', hide);
   }());
   </script>
 
