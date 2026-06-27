@@ -1,0 +1,100 @@
+{% load static %}
+
+{# ── Header row: role + date/location ── #}
+<div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+
+  <div class="min-w-0 flex-1">
+    <h4 class="font-display font-bold text-lg sm:text-xl
+               text-slate-800 dark:text-slate-100 leading-snug"
+        itemprop="roleName">
+      {{ exp.role }}
+    </h4>
+    <p class="text-brand font-semibold text-sm mt-0.5" itemprop="memberOf">
+      {{ exp.company }}
+    </p>
+  </div>
+
+  <div class="flex-shrink-0 text-right">
+    <span class="inline-flex items-center gap-1.5 text-xs font-mono
+                 text-slate-400 dark:text-slate-500 bg-slate-100
+                 dark:bg-white/5 px-2.5 py-1 rounded-lg">
+      <i class="fas fa-calendar-alt text-[10px] text-brand" aria-hidden="true"></i>
+      {{ exp.start_date|date:"M Y" }}
+      &mdash;
+      {% if exp.is_current %}
+        <span class="text-jade font-semibold">Present</span>
+      {% else %}
+        {{ exp.end_date|date:"M Y" }}
+      {% endif %}
+    </span>
+
+    {% if exp.location %}
+    <p class="text-xs text-slate-400 dark:text-slate-500 mt-1.5
+              flex items-center justify-end gap-1">
+      <i class="fas fa-map-pin text-[10px] text-brand" aria-hidden="true"></i>
+      {{ exp.location }}
+    </p>
+    {% endif %}
+  </div>
+
+</div>
+
+{# ── Divider ── #}
+<div class="h-px bg-gradient-to-r from-brand/20 via-cyan/10 to-transparent mb-4"
+     aria-hidden="true"></div>
+
+{# ── Description ── #}
+{% if exp.description %}
+<p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-4">
+  {{ exp.description }}
+</p>
+{% endif %}
+
+{# ── Tech stack — uses exp.technologies property ── #}
+{% if exp.technologies %}
+<div class="flex flex-wrap gap-1.5 mb-5" role="list" aria-label="Technologies used">
+  {% for tech in exp.technologies %}
+  <span role="listitem"
+        class="inline-flex items-center text-[11px] font-mono font-medium
+               px-2.5 py-1 rounded-full
+               bg-brand/5 dark:bg-brand/10
+               text-brand dark:text-brand-glow
+               border border-brand/15 dark:border-brand/20
+               transition-all duration-200 hover:bg-brand hover:text-white
+               hover:border-brand cursor-default select-none">
+    {{ tech }}
+  </span>
+  {% endfor %}
+</div>
+{% endif %}
+
+{# ── Achievements — uses exp.achievements property ── #}
+{% if exp.achievements %}
+<ul class="space-y-2.5" role="list" aria-label="Key achievements">
+  {% for achievement in exp.achievements %}
+  <li class="flex items-start gap-2.5 text-sm
+             text-slate-600 dark:text-slate-400 leading-relaxed"
+      role="listitem">
+    <span class="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center mt-0.5"
+          style="background: rgba(16,185,129,0.12); border: 1px solid rgba(16,185,129,0.25);"
+          aria-hidden="true">
+      <i class="fas fa-check text-[8px] text-jade"></i>
+    </span>
+    {{ achievement }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+
+{# ── Currently active badge ── #}
+{% if exp.is_current %}
+<div class="mt-5 pt-4 border-t border-slate-100 dark:border-white/5">
+  <span class="inline-flex items-center gap-1.5 text-xs font-semibold
+               text-jade bg-jade/8 dark:bg-jade/10
+               border border-jade/20 px-3 py-1.5 rounded-full">
+    <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse"
+          aria-hidden="true"></span>
+    Currently Active
+  </span>
+</div>
+{% endif %}
