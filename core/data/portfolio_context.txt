@@ -400,7 +400,7 @@ A: His primary stack includes Python (Django), PHP (Laravel), React, React Nativ
    Vercel, Cloudinary, and Google Cloud.
 
 Q: What is his work experience?
-A: He completed a 3-month Software Engineering internship at the National Social Security Fund
+A: He completed a 2-month Software Engineering internship at the National Social Security Fund
    (NSSF) Uganda from June to August 2025, working on enterprise systems using Django, Laravel,
    Java, PostgreSQL, Firebase, and Docker. He received a top grade for the placement.
 
