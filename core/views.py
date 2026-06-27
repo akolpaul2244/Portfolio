@@ -32,18 +32,17 @@ DetectorFactory.seed = 0
 logger = logging.getLogger(__name__)
 
 
-# ── Constants ──────────────────────────────────────────────────────────────────
+# Constants
 
-_MAX_MSG_LEN  = 500       # tighter than before — reduces token usage per request
+_MAX_MSG_LEN  = 500
 _MAX_FEEDBACK = 2_000
 _MAX_CAT_LEN  = 50
 _CACHE_SKILLS = "skills_grouped"
 _CACHE_TTL    = 60 * 15  # 15 minutes
 
-# llama-3.1-8b-instant: separate TPD bucket from 70b, ~10x fewer tokens per call.
-# More than sufficient for FAQ-style portfolio questions.
+# llama-3.1-8b-instant has a separate TPD bucket from 70b and uses ~10x fewer tokens.
 _GROQ_MODEL      = "llama-3.1-8b-instant"
-_GROQ_MAX_TOKENS = 300   # portfolio answers don't need to be long
+_GROQ_MAX_TOKENS = 300
 
 DEMO_BACKEND: list[dict] = [
     {"name": "Django",     "proficiency": 92},
@@ -104,8 +103,8 @@ _TOPIC_KEYWORDS: dict[str, list[str]] = {
     "Protection":    ["safe", "violence", "abuse", "protect", "security"],
 }
 
-# Compact system prompt — keeps token usage low on every request.
-# The full portfolio context is appended from portfolio_context.txt.
+# Compact system prompt — full context is appended from portfolio_context.txt.
+# Keeping this short is the biggest lever for staying within the daily token limit.
 _SYSTEM_PROMPT_PREFIX = (
     "You are Akol Paul's portfolio assistant. Answer questions about him "
     "concisely and professionally using only the context below. "
@@ -124,7 +123,7 @@ _ERROR_REPLY = (
 )
 
 
-# ── Internal helpers ───────────────────────────────────────────────────────────
+# Internal helpers
 
 def _ratelimit(key: str, rate: str, block: bool = True):
     """No-op decorator factory when django-ratelimit is not installed."""
@@ -200,7 +199,7 @@ def _build_grouped_skills() -> dict:
     return grouped
 
 
-# ── Page views ─────────────────────────────────────────────────────────────────
+# Page views
 
 @ensure_csrf_cookie
 def home(request):
@@ -208,8 +207,10 @@ def home(request):
         "featured_projects": Project.objects.filter(featured=True).select_related()[:3],
         "skills":            Skill.objects.all()[:8],
         "testimonials":      Testimonial.objects.all()[:3],
-        "experiences":       Experience.objects.all()[:2],
-        "page":              "home",
+        "experiences":       Experience.objects.filter(
+                                 type=Experience.TYPE_INTERNSHIP
+                             ).order_by('-start_date')[:2],
+        "page": "home",
     })
 
 
@@ -272,9 +273,19 @@ def skills_view(request):
 
 
 def experience_view(request):
+    internships = Experience.objects.filter(
+        type=Experience.TYPE_INTERNSHIP
+    ).order_by('-start_date')
+
+    classwork = Experience.objects.filter(
+        type=Experience.TYPE_CLASS
+    ).order_by('-start_date')
+
     return render(request, "experience.html", {
-        "experiences": Experience.objects.all(),
-        "page":        "experience",
+        "internships":  internships,
+        "classwork":    classwork,
+        "experiences":  Experience.objects.all().order_by('-start_date'),
+        "page":         "experience",
     })
 
 
@@ -310,7 +321,7 @@ def contact(request):
     return redirect("contact")
 
 
-# ── API views ──────────────────────────────────────────────────────────────────
+# API views
 
 @require_POST
 @_ratelimit(key="ip", rate="10/m")
@@ -327,7 +338,7 @@ def ai_chat(request):
     if not user_message:
         return _json_error("Message cannot be empty.", status=400)
 
-    context_text = _get_portfolio_context()
+    context_text   = _get_portfolio_context()
     system_content = _SYSTEM_PROMPT_PREFIX + context_text
 
     try:
@@ -344,8 +355,8 @@ def ai_chat(request):
         return JsonResponse({"success": True, "reply": reply})
 
     except RateLimitError:
-        # Return 200 so the frontend renders a friendly bubble instead of a generic error
-        logger.warning("Groq rate limit reached — returning user-facing message")
+        # Return 200 so the frontend renders a friendly bubble rather than a silent error
+        logger.warning("Groq rate limit reached")
         return JsonResponse({"success": True, "reply": _RATE_LIMIT_REPLY})
 
     except Exception:
@@ -413,7 +424,7 @@ def refuconnect_demo(request):
         })
 
 
-#  Error handlers 
+# Error handlers
 
 def handler404(request, exception):
     return render(request, "404.html", status=404)

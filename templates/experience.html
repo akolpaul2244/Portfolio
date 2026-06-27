@@ -9,7 +9,7 @@
 
 {% block content %}
 
-{# ─── HERO ──────────────────────────────────────────────────────── #}
+{# HERO #}
 <section class="relative hero-bg overflow-hidden pt-28 sm:pt-32 pb-20" aria-labelledby="exp-hero-heading">
   <canvas id="particles-canvas" class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true"></canvas>
 
@@ -28,10 +28,9 @@
       Years of <span class="hero-name">Impact</span><br class="hidden sm:block"> &amp; Growth
     </h1>
     <p class="text-base md:text-lg text-slate-500 dark:text-slate-400 leading-relaxed max-w-xl mx-auto reveal delay-200">
-      From early-stage startups to established organisations — a timeline of the engineering challenges I've tackled and the systems I've shipped.
+      From academic foundations to enterprise deployments — a timeline of the engineering challenges I've tackled and the systems I've shipped.
     </p>
 
-    {# Quick stats #}
     <div class="flex flex-wrap justify-center gap-4 sm:gap-6 mt-10 reveal delay-300" aria-label="Career statistics">
       <div class="glass px-5 py-3 rounded-2xl text-center min-w-[80px]">
         <p class="stat-number text-2xl font-display"
@@ -55,19 +54,18 @@
   </div>
 </section>
 
-{# Gradient divider — no cultural association #}
 <div class="mx-4 sm:mx-6 md:mx-auto md:max-w-5xl my-0 h-px rounded-full"
      style="background: linear-gradient(90deg, transparent, rgba(79,70,229,0.3), rgba(34,211,238,0.3), transparent);"
      aria-hidden="true"></div>
 
-{# ─── TIMELINE ──────────────────────────────────────────────────── #}
+{# TIMELINE #}
 <section class="max-w-5xl mx-auto px-4 sm:px-6 py-16 md:py-20" aria-labelledby="timeline-section-heading">
   <h2 id="timeline-section-heading" class="sr-only">Work Timeline</h2>
 
-  {% if experiences %}
+  {% if internships or classwork %}
   <div class="grid lg:grid-cols-12 gap-8 lg:gap-10">
 
-    {# Sticky side panel (desktop only) #}
+    {# Sticky side panel — desktop only #}
     <div class="hidden lg:block lg:col-span-3">
       <div class="sticky top-24 space-y-4">
         <div class="glass-card p-5">
@@ -76,8 +74,10 @@
             Timeline
           </p>
           <nav aria-label="Jump to role" class="mt-3 space-y-1" id="timeline-nav">
-            {% for exp in experiences %}
-            <a href="#exp-{{ forloop.counter }}"
+            {% if internships %}
+            <p class="text-[10px] font-mono uppercase tracking-widest text-slate-400 px-2 pt-1">Internships</p>
+            {% for exp in internships %}
+            <a href="#exp-i-{{ forloop.counter }}"
                class="block text-xs font-medium py-1.5 px-2 rounded-lg text-slate-500 dark:text-slate-400
                       hover:text-brand hover:bg-brand/5 transition-colors truncate
                       focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
@@ -85,18 +85,30 @@
               {{ exp.company|escape }}
             </a>
             {% endfor %}
+            {% endif %}
+            {% if classwork %}
+            <p class="text-[10px] font-mono uppercase tracking-widest text-slate-400 px-2 pt-3">Academic</p>
+            {% for exp in classwork %}
+            <a href="#exp-c-{{ forloop.counter }}"
+               class="block text-xs font-medium py-1.5 px-2 rounded-lg text-slate-500 dark:text-slate-400
+                      hover:text-brand hover:bg-brand/5 transition-colors truncate
+                      focus:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+               title="{{ exp.role|escape }} @ {{ exp.company|escape }}">
+              {{ exp.company|escape }}
+            </a>
+            {% endfor %}
+            {% endif %}
           </nav>
         </div>
 
-        {# Download CV #}
         <div class="glass-card p-5 text-center">
           <div class="w-10 h-10 rounded-xl flex items-center justify-center mx-auto mb-3 text-brand"
                style="background: rgba(79,70,229,0.1);" aria-hidden="true">
             <i class="fas fa-file-arrow-down text-sm"></i>
           </div>
           <p class="text-xs font-semibold text-slate-700 dark:text-slate-300 mb-3">Download Full CV</p>
-          <a href="{% static 'files/akol-paul-cv.pdf' %}"
-             download
+          <a href="{% static 'files/Akol_Paul_CV.pdf' %}"
+             download="Akol_Paul_CV.pdf"
              class="btn-primary text-xs py-2 px-4 justify-center w-full
                     focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
             <span class="flex items-center gap-1.5">
@@ -109,115 +121,69 @@
     </div>
 
     {# Timeline entries #}
-    <div class="lg:col-span-9 space-y-0" id="experience-list">
-      {% for exp in experiences %}
-      <article id="exp-{{ forloop.counter }}"
-               class="timeline-item reveal {% if not forloop.first %}mt-8{% endif %}"
-               itemscope itemtype="https://schema.org/OrganizationRole">
+    <div class="lg:col-span-9" id="experience-list">
 
-        <div class="timeline-dot" aria-hidden="true"></div>
-
-        <div class="glass-card p-5 sm:p-6 md:p-8 ml-2">
-
-          {# Header #}
-          <header class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 mb-4">
-            <div class="flex items-start gap-4">
-
-              {# Company avatar #}
-              <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center
-                           flex-shrink-0 text-white text-lg font-display font-bold"
-                   style="background: linear-gradient(135deg,
-                     {% cycle '#4f46e5' '#22d3ee' '#10b981' '#f59e0b' '#6366f1' as colors %},
-                     {% cycle '#6366f1' '#10b981' '#f59e0b' '#4f46e5' '#22d3ee' %});"
-                   aria-hidden="true">
-                {{ exp.company|slice:":1"|upper }}
-              </div>
-
-              <div class="min-w-0">
-                <h2 class="font-display font-bold text-base sm:text-lg md:text-xl
-                           text-slate-800 dark:text-slate-100 leading-tight"
-                    itemprop="roleName">
-                  {{ exp.role|escape }}
-                </h2>
-                <p class="text-brand font-semibold text-sm mt-0.5" itemprop="name">
-                  {{ exp.company|escape }}
-                </p>
-              </div>
-            </div>
-
-            {# Date + status #}
-            <div class="flex flex-col items-start sm:items-end gap-2 flex-shrink-0">
-              <div class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-mono">
-                <i class="far fa-calendar" aria-hidden="true"></i>
-                <time itemprop="startDate"
-                      datetime="{{ exp.start_date|date:'Y-m' }}">{{ exp.start_date|date:"M Y" }}</time>
-                <span aria-hidden="true">—</span>
-                {% if exp.is_current %}
-                  <time>Present</time>
-                {% else %}
-                  <time itemprop="endDate"
-                        datetime="{{ exp.end_date|date:'Y-m' }}">{{ exp.end_date|date:"M Y" }}</time>
-                {% endif %}
-              </div>
-              {% if exp.is_current %}
-              <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-jade px-3 py-1 rounded-full"
-                    style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2);">
-                <span class="w-1.5 h-1.5 rounded-full bg-jade animate-pulse" aria-hidden="true"></span>
-                Current Role
-              </span>
-              {% else %}
-              <span class="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 px-3 py-1 rounded-full"
-                    style="background: rgba(100,116,139,0.08); border: 1px solid rgba(100,116,139,0.15);">
-                <i class="fas fa-circle-check text-slate-400" aria-hidden="true"></i>
-                Completed
-              </span>
-              {% endif %}
-            </div>
-          </header>
-
-          {# Location — shown generically #}
-          {% if exp.location %}
-          <p class="text-xs text-slate-400 mb-3 flex items-center gap-1.5">
-            <i class="fas fa-location-dot" aria-hidden="true"></i>
-            {{ exp.location|escape }}
-          </p>
-          {% endif %}
-
-          <div class="h-px bg-slate-100 dark:bg-white/5 mb-4"></div>
-
-          {# Description #}
-          <div class="prose prose-sm max-w-none text-slate-600 dark:text-slate-400 leading-relaxed"
-               itemprop="description">
-            {{ exp.description }}
-          </div>
-
-          {# Achievements #}
-          {% if exp.achievements %}
-          <ul class="mt-4 space-y-2" aria-label="Key achievements">
-            {% for achievement in exp.achievements %}
-            <li class="flex items-start gap-2.5 text-sm text-slate-600 dark:text-slate-400">
-              <span class="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-jade"
-                    style="background: rgba(16,185,129,0.1);">
-                <i class="fas fa-check text-[10px]" aria-hidden="true"></i>
-              </span>
-              {{ achievement|escape }}
-            </li>
-            {% endfor %}
-          </ul>
-          {% endif %}
-
-          {# Tech tags #}
-          {% if exp.technologies %}
-          <div class="flex flex-wrap gap-2 mt-5" aria-label="Technologies used">
-            {% for tech in exp.technologies %}
-            <span class="tech-tag">{{ tech|escape }}</span>
-            {% endfor %}
-          </div>
-          {% endif %}
-
+      {# Internship section #}
+      {% if internships %}
+      <div class="mb-12">
+        <div class="flex items-center gap-3 mb-8 reveal">
+          <span class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 text-jade"
+                style="background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.2);"
+                aria-hidden="true">
+            <i class="fas fa-building-columns text-sm"></i>
+          </span>
+          <h3 class="font-display font-bold text-xl text-slate-800 dark:text-slate-100">
+            Internship Experience
+          </h3>
         </div>
-      </article>
-      {% endfor %}
+
+        <div class="space-y-0">
+          {% for exp in internships %}
+          <article id="exp-i-{{ forloop.counter }}"
+                   class="timeline-item reveal {% if not forloop.first %}mt-8{% endif %}"
+                   itemscope itemtype="https://schema.org/OrganizationRole">
+
+            <div class="timeline-dot" aria-hidden="true"></div>
+
+            <div class="glass-card p-5 sm:p-6 md:p-8 ml-2">
+              {% include "partials/experience_card.html" with exp=exp %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
+
+      {# Academic / class section #}
+      {% if classwork %}
+      <div class="{% if internships %}mt-14{% endif %}">
+        <div class="flex items-center gap-3 mb-8 reveal">
+          <span class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 text-brand"
+                style="background: rgba(79,70,229,0.1); border: 1px solid rgba(79,70,229,0.2);"
+                aria-hidden="true">
+            <i class="fas fa-graduation-cap text-sm"></i>
+          </span>
+          <h3 class="font-display font-bold text-xl text-slate-800 dark:text-slate-100">
+            Academic Experience
+          </h3>
+        </div>
+
+        <div class="space-y-0">
+          {% for exp in classwork %}
+          <article id="exp-c-{{ forloop.counter }}"
+                   class="timeline-item reveal {% if not forloop.first %}mt-8{% endif %}"
+                   itemscope itemtype="https://schema.org/OrganizationRole">
+
+            <div class="timeline-dot" aria-hidden="true"></div>
+
+            <div class="glass-card p-5 sm:p-6 md:p-8 ml-2">
+              {% include "partials/experience_card.html" with exp=exp %}
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
 
       {# End cap #}
       <div class="flex items-center gap-4 mt-12 reveal">
@@ -231,10 +197,10 @@
       </div>
       <p class="text-center text-sm text-slate-400 mt-3 reveal delay-100">The journey continues…</p>
     </div>
+
   </div>
 
   {% else %}
-  {# Empty state #}
   <div class="text-center py-24 reveal">
     <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6
                 text-slate-300 dark:text-slate-600"
@@ -248,12 +214,11 @@
 
 </section>
 
-{# ─── CTA STRIP ──────────────────────────────────────────────────── #}
+{# CTA STRIP #}
 <section class="relative overflow-hidden py-16 sm:py-20"
          style="background: linear-gradient(135deg, rgba(79,70,229,0.06) 0%, rgba(34,211,238,0.04) 100%);"
          aria-labelledby="exp-cta-heading">
 
-  {# Subtle geometric background — no cultural pattern #}
   <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
     <div class="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-10 blur-3xl"
          style="background: radial-gradient(circle, #4f46e5, transparent 70%);"></div>
@@ -282,8 +247,8 @@
           Get in Touch
         </span>
       </a>
-      <a href="{% static 'files/akol-paul-cv.pdf' %}"
-         download
+      <a href="{% static 'files/Akol_Paul_CV.pdf' %}"
+         download="Akol_Paul_CV.pdf"
          class="btn-outline focus:outline-none focus-visible:ring-2 focus-visible:ring-brand">
         <span class="flex items-center gap-2">
           <i class="fas fa-download text-sm" aria-hidden="true"></i>
@@ -302,7 +267,7 @@
   'use strict';
 
   var navLinks = document.querySelectorAll('#timeline-nav a');
-  var sections = document.querySelectorAll('[id^="exp-"]');
+  var sections = document.querySelectorAll('[id^="exp-i-"], [id^="exp-c-"]');
   if (!navLinks.length || !sections.length) return;
 
   var obs = new IntersectionObserver(function (entries) {
@@ -311,9 +276,9 @@
       var id = entry.target.id;
       navLinks.forEach(function (a) {
         var isActive = a.getAttribute('href') === '#' + id;
-        a.classList.toggle('text-brand', isActive);
-        a.classList.toggle('bg-brand/5', isActive);
-        a.classList.toggle('text-slate-500', !isActive);
+        a.classList.toggle('text-brand',      isActive);
+        a.classList.toggle('bg-brand/5',      isActive);
+        a.classList.toggle('text-slate-500',  !isActive);
         a.setAttribute('aria-current', isActive ? 'location' : 'false');
       });
     });
