@@ -20,6 +20,7 @@ from textblob import TextBlob
 
 from .forms import ContactForm
 from .models import Experience, Project, Skill, Testimonial
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 try:
     from django_ratelimit.decorators import ratelimit
@@ -180,7 +181,7 @@ def _build_grouped_skills() -> dict:
 
 # Page views
 
-
+@ensure_csrf_cookie
 def home(request):
     return render(request, "home.html", {
         "featured_projects": Project.objects.filter(featured=True).select_related()[:3],
