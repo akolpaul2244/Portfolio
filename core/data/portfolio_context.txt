@@ -302,8 +302,8 @@ communication, social media API integration, audit systems, and full IEEE SRS de
 # ============================================================
 
 --- Backend Development ---
-  Languages:   Python, PHP, Java, JavaScript (Node.js)
-  Frameworks:  Django, Django REST Framework, Laravel, Flask
+  Languages:   Python, Java, PHP, Java, JavaScript (Node.js)
+  Frameworks:  Django, Django REST Framework, Laravel, Flask, Spring Boot
   APIs:        RESTful APIs, GraphQL
   Auth:        JWT, session-based auth, OAuth2
   Security:    OWASP ASVS, CSRF protection, input sanitisation, bcrypt, CSP headers

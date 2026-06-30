@@ -47,6 +47,7 @@ _GROQ_MAX_TOKENS = 300
 DEMO_BACKEND: list[dict] = [
     {"name": "Django",     "proficiency": 92},
     {"name": "Python",     "proficiency": 90},
+    {"name": "Java",       "proficiency": 80},
     {"name": "PostgreSQL", "proficiency": 85},
     {"name": "REST APIs",  "proficiency": 92},
     {"name": "WebSockets", "proficiency": 78},
@@ -69,7 +70,7 @@ DEMO_AI: list[dict] = [
 ]
 
 DEMO_TOOLS: list[str] = [
-    "Django", "Python", "React", "Laravel", "PostgreSQL", "Redis",
+    "Django", "Python", "Java" "React", "Laravel", "PostgreSQL", "Redis",
     "Docker", "Git", "WebSockets", "Celery", "NGINX", "AWS S3",
     "Pandas", "Scikit-learn", "HuggingFace", "Tailwind CSS", "Vue.js",
     "REST APIs", "GraphQL", "Linux", "Figma", "Chart.js", "Stripe API",
